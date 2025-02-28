@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:mobile_biz/app/resources/app_colors.dart';
 
+import '../resources/app_colors.dart';
 import '../resources/app_styles.dart';
 class CommonTextField extends StatelessWidget {
   final String label;

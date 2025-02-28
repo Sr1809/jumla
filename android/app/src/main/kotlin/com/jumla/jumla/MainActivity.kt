@@ -1,4 +1,4 @@
-package com.example.jumla
+package com.jumla.jumla
 
 import io.flutter.embedding.android.FlutterActivity
 

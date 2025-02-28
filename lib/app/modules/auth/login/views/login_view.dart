@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
-import 'package:mobile_biz/app/common/common_text_field.dart';
-import 'package:mobile_biz/app/resources/app_colors.dart';
-import 'package:mobile_biz/app/resources/app_styles.dart';
 
+
+import '../../../../common/common_text_field.dart';
+import '../../../../resources/app_colors.dart';
+import '../../../../resources/app_styles.dart';
 import '../controllers/login_controller.dart';
 
 class LoginView extends GetWidget<LoginController> {
@@ -13,8 +14,8 @@ class LoginView extends GetWidget<LoginController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("MobileBiz Co"),
-        backgroundColor: Colors.green,
+        title: Text("Jumla",style: AppTextStyles.bold(fontSize: 20.0, fontColor: AppColors.whiteColor),),
+        backgroundColor: AppColors.greenColor,
         actions: [
           PopupMenuButton<String>(
             onSelected: (value) {
@@ -56,46 +57,40 @@ class LoginView extends GetWidget<LoginController> {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                SizedBox(
-                  width: Get.width*0.3,
-                  child: ElevatedButton(
-                    onPressed: () {
-                      // Handle Sign In
-                    },
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.grey[400],
-                      padding: EdgeInsets.symmetric(horizontal: 30, vertical: 12),
-                      textStyle: TextStyle(color: Colors.black,fontSize: 16),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.zero,
-                      ),
+                ElevatedButton(
+                  onPressed: () {
+                    // Handle Sign In
+                  },
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.grey[400],
+                    padding: EdgeInsets.symmetric(horizontal: 30, vertical: 12),
+                    textStyle: TextStyle(color: Colors.black,fontSize: 16),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.zero,
                     ),
-                    child: Text(
-                      "Sign In",
-                      style: AppTextStyles.regular(fontSize: 18.0, fontColor: AppColors.blackColor),
-                    ),
+                  ),
+                  child: Text(
+                    "Sign In",
+                    style: AppTextStyles.regular(fontSize: 18.0, fontColor: AppColors.blackColor),
                   ),
                 ),
                 SizedBox(width: 20),
-                SizedBox(
-                  width: Get.width*0.3,
-                  child: ElevatedButton(
-                    onPressed: () {
-                      controller.usernameController.clear();
-                      controller.passwordController.clear();
-                    },
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.grey[400],
-                      padding: EdgeInsets.symmetric(horizontal: 30, vertical: 12),
-                      textStyle: TextStyle(color: Colors.black,fontSize: 16),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.zero,
-                      ),
+                ElevatedButton(
+                  onPressed: () {
+                    controller.usernameController.clear();
+                    controller.passwordController.clear();
+                  },
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.grey[400],
+                    padding: EdgeInsets.symmetric(horizontal: 30, vertical: 12),
+                    textStyle: TextStyle(color: Colors.black,fontSize: 16),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.zero,
                     ),
-                    child: Text(
-                      "Reset",
-                      style: AppTextStyles.regular(fontSize: 18.0, fontColor: AppColors.blackColor),
-                    ),
+                  ),
+                  child: Text(
+                    "Reset",
+                    style: AppTextStyles.regular(fontSize: 18.0, fontColor: AppColors.blackColor),
                   ),
                 ),
               ],
