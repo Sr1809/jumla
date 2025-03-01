@@ -34,3 +34,48 @@ class CommonTextField extends StatelessWidget {
     );
   }
 }
+
+class CommonTextFieldWithTitle extends StatelessWidget {
+  final String label;
+   String? hint;
+  final TextEditingController controller;
+  final bool isPassword;
+
+   CommonTextFieldWithTitle({
+    required this.label,
+     this.hint,
+    required this.controller,
+    this.isPassword = false,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(label,style: AppTextStyles.regular(fontSize: 16.0, fontColor: AppColors.blackColor),),
+          SizedBox(
+            height: 40,
+            child: TextField(
+              controller: controller,
+              obscureText: isPassword,
+              decoration: InputDecoration(
+                hintText: hint??"",
+                hintStyle: AppTextStyles.regular(fontSize: 16.0, fontColor: AppColors.greyColor),
+                enabledBorder: UnderlineInputBorder(
+                  borderSide: BorderSide(color:  AppColors.blackColor),
+
+                ),
+                focusedBorder: UnderlineInputBorder(
+                  borderSide: BorderSide(color: AppColors.blackColor, width: 1),
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}

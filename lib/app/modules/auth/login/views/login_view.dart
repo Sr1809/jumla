@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
+import 'package:jumla/app/routes/app_pages.dart';
 
 
 import '../../../../common/common_text_field.dart';
@@ -23,6 +24,7 @@ class LoginView extends GetWidget<LoginController> {
                 controller.showAccountField.value = !controller.showAccountField.value;
               }
             },
+            iconColor: Colors.white70,
             itemBuilder: (context) => [
               PopupMenuItem(
                 height: 30,
@@ -59,7 +61,7 @@ class LoginView extends GetWidget<LoginController> {
               children: [
                 ElevatedButton(
                   onPressed: () {
-                    // Handle Sign In
+                    Get.toNamed(Routes.COMPANY_INFO_NOTE);
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.grey[400],
