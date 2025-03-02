@@ -170,6 +170,8 @@ class DrawerView extends GetView<DrawersController> {
       dense: true,
       title: Text(title, style: TextStyle(fontSize: 14, color: Colors.grey)),
       children: children,
+      collapsedIconColor: Colors.white60,
+      iconColor: Colors.white60,
     );
   }
 
