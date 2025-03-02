@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 
+import '../../../../common/common_appbar.dart';
 import '../../../../common/common_text_field.dart';
 import '../../../../resources/app_colors.dart';
 import '../../../../resources/app_styles.dart';
@@ -13,16 +14,7 @@ class AddDeviceNameView extends GetView<AddDeviceNameController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("Device Info", style: AppTextStyles.bold(fontSize: 18.0, fontColor: AppColors.whiteColor)),
-        backgroundColor: AppColors.blueColor,
-        leading: IconButton(
-          icon: Icon(Icons.arrow_back_ios, color: AppColors.whiteColor),
-          onPressed: () {
-            Get.back();
-          },
-        ),
-      ),
+      appBar: CommonAppBar(title: 'Device Info',showBackButton: true,),
       body: Padding(
         padding: const EdgeInsets.all(20.0),
         child: Column(

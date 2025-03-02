@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
-import 'package:jumla/app/modules/home/models/home_models.dart';
 import 'package:jumla/app/resources/app_assets.dart';
 import 'package:jumla/app/resources/app_colors.dart';
+
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:jumla/app/modules/drawer/controllers/drawer_controller.dart';
+import 'package:jumla/app/modules/home/models/home_models.dart';
 import 'package:jumla/app/resources/app_styles.dart';
 import 'package:jumla/app/routes/app_pages.dart';
-
+import '../../../resources/app_styles.dart';
+import '../../drawer/views/drawer_view.dart';
 import '../controllers/home_controller.dart';
 
 class HomeView extends GetView<HomeController> {
@@ -309,6 +312,7 @@ class HomeView extends GetView<HomeController> {
           ],
         ),
       ),
+      drawer: DrawerView(),
     );
   }
 }

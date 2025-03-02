@@ -16,6 +16,8 @@ import '../modules/auth/company_info_note/bindings/company_info_note_binding.dar
 import '../modules/auth/company_info_note/views/company_info_note_view.dart';
 import '../modules/auth/login/bindings/login_binding.dart';
 import '../modules/auth/login/views/login_view.dart';
+import '../modules/drawer/bindings/drawer_binding.dart';
+import '../modules/drawer/views/drawer_view.dart';
 import '../modules/home/bindings/home_binding.dart';
 import '../modules/home/views/home_view.dart';
 
@@ -24,12 +26,12 @@ part 'app_routes.dart';
 class AppPages {
   AppPages._();
 
-  static const INITIAL = Routes.HOME;
+  static const INITIAL = Routes.LOGIN;
 
   static final routes = [
     GetPage(
       name: _Paths.HOME,
-      page: () => HomeView(),
+      page: () => const HomeView(),
       binding: HomeBinding(),
     ),
     GetPage(
@@ -71,6 +73,11 @@ class AppPages {
       name: _Paths.CUSTOMERS,
       page: () => CustomersView(),
       binding: CustomersBinding(),
+    ),
+    GetPage(
+      name: _Paths.DRAWER,
+      page: () => const DrawerView(),
+      binding: DrawerBinding(),
     ),
   ];
 }

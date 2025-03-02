@@ -5,6 +5,7 @@ import 'package:jumla/app/common/common_text_field.dart';
 import 'package:jumla/app/resources/app_colors.dart';
 import 'package:jumla/app/resources/app_styles.dart';
 
+import '../../../../common/common_appbar.dart';
 import '../../../../common/common_picker.dart';
 import '../../../../routes/app_pages.dart';
 import '../controllers/add_currency_date_formats_controller.dart';
@@ -17,22 +18,8 @@ class AddCurrencyDateFormatsView
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.whiteColor,
-      appBar: AppBar(
-        title: Text(
-          "Currency & date formats",
-          style: AppTextStyles.bold(
-            fontSize: 18.0,
-            fontColor: AppColors.whiteColor,
-          ),
-        ),
-        backgroundColor: AppColors.blueColor,
-        leading: IconButton(
-          icon: Icon(Icons.arrow_back_ios, color: AppColors.whiteColor),
-          onPressed: () {
-            Get.back();
-          },
-        ),
-      ),
+      appBar: CommonAppBar(title: 'Currency & date formats',showBackButton: true,),
+
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(20.0),

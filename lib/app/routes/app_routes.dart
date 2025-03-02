@@ -12,6 +12,8 @@ abstract class Routes {
   static const ADD_TAX_CODE_DATA = _Paths.ADD_TAX_CODE_DATA;
   static const ADD_DEVICE_NAME = _Paths.ADD_DEVICE_NAME;
   static const CUSTOMERS = _Paths.CUSTOMERS;
+  static const ADD_DEVICE_NAME = _Paths.ADD_DEVICE_NAME;
+  static const DRAWER = _Paths.DRAWER;
 }
 
 abstract class _Paths {
@@ -25,4 +27,5 @@ abstract class _Paths {
   static const ADD_TAX_CODE_DATA = '/add-tax-code-data';
   static const ADD_DEVICE_NAME = '/add-device-name';
   static const CUSTOMERS = '/customers';
+  static const DRAWER = '/drawer';
 }
