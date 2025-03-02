@@ -12,7 +12,7 @@ class AppTextStyles {
       fontSize: fontSize,
       decoration:
           isUnderLine == true ? TextDecoration.underline : TextDecoration.none,
-        decorationColor:AppColors.blueColor
+        decorationColor:Colors.blue
     );
   }
   static light({required fontSize, required fontColor, bool? isUnderLine}) {

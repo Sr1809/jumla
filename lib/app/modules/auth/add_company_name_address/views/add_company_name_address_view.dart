@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import 'package:get/get.dart';
 import 'package:jumla/app/resources/app_assets.dart';
 import 'package:jumla/app/resources/app_colors.dart';
@@ -32,31 +33,21 @@ class AddCompanyNameAddressView
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          CommonTextFieldWithTitle(
-              label: "Company name",
-              controller: controller.companyNameController),
-          CommonTextFieldWithTitle(
-              label: "Address", controller: controller.addressController),
-          CommonTextFieldWithTitle(
-              label: "Contact number",
-              controller: controller.contactNumberController),
-          CommonTextFieldWithTitle(
-              label: "Email", controller: controller.emailController),
-          CommonTextFieldWithTitle(
-            label: "Website",
-            controller: controller.websiteController,
-            hint: "http://mycompany.com",
-          ),
-          CommonTextFieldWithTitle(
-              label: "Slogan", controller: controller.sloganController),
+          SizedBox(height: 20,),
+          CommonTextFieldWithTitle(label: "Company name", controller: controller.companyNameController),
+          CommonTextFieldWithTitle(label: "Address", controller: controller.addressController),
+          CommonTextFieldWithTitle(label: "Contact number", controller: controller.contactNumberController),
+          CommonTextFieldWithTitle(label: "Email", controller: controller.emailController),
+          CommonTextFieldWithTitle(label: "Website", controller: controller.websiteController,hint: "http://mycompany.com",),
+          CommonTextFieldWithTitle(label: "Slogan", controller: controller.sloganController),
         ],
       ),
       bottomNavigationBar: Container(
         color: AppColors.blueColor,
         padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-        child: GestureDetector(
-          onTap: () {
-            Get.toNamed(Routes.HOME);
+        child: InkWell(
+          onTap: (){
+Get.toNamed(Routes.ADD_CURRENCY_DATE_FORMATS);
           },
           child: SizedBox(
             width: double.infinity,
@@ -64,8 +55,7 @@ class AddCompanyNameAddressView
             child: Center(
               child: Text(
                 "NEXT",
-                style: AppTextStyles.bold(
-                    fontSize: 18.0, fontColor: AppColors.whiteColor),
+                style: AppTextStyles.bold(fontSize: 18.0, fontColor: AppColors.whiteColor),
               ),
             ),
           ),
