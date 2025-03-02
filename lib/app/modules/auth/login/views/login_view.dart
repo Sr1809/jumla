@@ -104,7 +104,7 @@ class LoginView extends GetWidget<LoginController> {
               },
               child: Text(
                 "Create an account",
-                style:   AppTextStyles.regular(fontSize: 18.0, fontColor: AppColors.blueColor,isUnderLine: true),
+                style:   AppTextStyles.regular(fontSize: 18.0, fontColor: Colors.blue,isUnderLine: true),
               ),
             ),
             SizedBox(height: 5),
@@ -114,7 +114,7 @@ class LoginView extends GetWidget<LoginController> {
               },
               child: Text(
                 "Forgot password",
-                style:   AppTextStyles.regular(fontSize: 18.0, fontColor: AppColors.blueColor,isUnderLine: true),
+                style:   AppTextStyles.regular(fontSize: 18.0, fontColor: Colors.blue,isUnderLine: true),
               ),
             ),
           ],

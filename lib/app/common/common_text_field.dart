@@ -6,11 +6,13 @@ class CommonTextField extends StatelessWidget {
   final String label;
   final TextEditingController controller;
   final bool isPassword;
+  Color?  underlineColor;
 
   CommonTextField({
     required this.label,
     required this.controller,
     this.isPassword = false,
+    this.underlineColor = Colors.blue,
   });
 
   @override
@@ -22,12 +24,12 @@ class CommonTextField extends StatelessWidget {
         obscureText: isPassword,
         decoration: InputDecoration(
           hintText: label,
-          hintStyle: AppTextStyles.regular(fontSize: 20.0, fontColor: AppColors.greyColor),
+          hintStyle: AppTextStyles.regular(fontSize: 16.0, fontColor: AppColors.greyColor),
           enabledBorder: UnderlineInputBorder(
-            borderSide: BorderSide(color: Colors.blue),
+            borderSide: BorderSide(color: underlineColor??Colors.blue,width: 0.5),
           ),
           focusedBorder: UnderlineInputBorder(
-            borderSide: BorderSide(color: Colors.blue, width: 2),
+            borderSide: BorderSide(color: underlineColor??Colors.blue, width: 0.5),
           ),
         ),
       ),
@@ -65,11 +67,11 @@ class CommonTextFieldWithTitle extends StatelessWidget {
                 hintText: hint??"",
                 hintStyle: AppTextStyles.regular(fontSize: 16.0, fontColor: AppColors.greyColor),
                 enabledBorder: UnderlineInputBorder(
-                  borderSide: BorderSide(color:  AppColors.blackColor),
+                  borderSide: BorderSide(color:  AppColors.blackColor,width: 0.5),
 
                 ),
                 focusedBorder: UnderlineInputBorder(
-                  borderSide: BorderSide(color: AppColors.blackColor, width: 1),
+                  borderSide: BorderSide(color: AppColors.blackColor, width: 0.5),
                 ),
               ),
             ),

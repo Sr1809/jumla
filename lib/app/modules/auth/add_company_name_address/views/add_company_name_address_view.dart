@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:jumla/app/resources/app_assets.dart';
 import 'package:jumla/app/resources/app_colors.dart';
 import 'package:jumla/app/resources/app_styles.dart';
+import 'package:jumla/app/routes/app_pages.dart';
 
 import '../../../../common/common_text_field.dart';
 import '../controllers/add_company_name_address_controller.dart';
@@ -31,6 +32,7 @@ class AddCompanyNameAddressView
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          SizedBox(height: 20,),
           CommonTextFieldWithTitle(label: "Company name", controller: controller.companyNameController),
           CommonTextFieldWithTitle(label: "Address", controller: controller.addressController),
           CommonTextFieldWithTitle(label: "Contact number", controller: controller.contactNumberController),
@@ -44,7 +46,7 @@ class AddCompanyNameAddressView
         padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
         child: GestureDetector(
           onTap: (){
-
+Get.toNamed(Routes.ADD_CURRENCY_DATE_FORMATS);
           },
           child: SizedBox(
             width: double.infinity,

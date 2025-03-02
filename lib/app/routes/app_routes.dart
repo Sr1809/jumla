@@ -7,6 +7,10 @@ abstract class Routes {
   static const LOGIN = _Paths.LOGIN;
   static const COMPANY_INFO_NOTE = _Paths.COMPANY_INFO_NOTE;
   static const ADD_COMPANY_NAME_ADDRESS = _Paths.ADD_COMPANY_NAME_ADDRESS;
+  static const ADD_CURRENCY_DATE_FORMATS = _Paths.ADD_CURRENCY_DATE_FORMATS;
+  static const ADD_TAX_SETUP = _Paths.ADD_TAX_SETUP;
+  static const ADD_TAX_CODE_DATA = _Paths.ADD_TAX_CODE_DATA;
+  static const ADD_DEVICE_NAME =  _Paths.ADD_DEVICE_NAME;
 }
 
 abstract class _Paths {
@@ -15,4 +19,8 @@ abstract class _Paths {
   static const LOGIN = '/login';
   static const COMPANY_INFO_NOTE = '/company-info-note';
   static const ADD_COMPANY_NAME_ADDRESS = '/add-company-name-address';
+  static const ADD_CURRENCY_DATE_FORMATS = '/add-currency-date-formats';
+  static const ADD_TAX_SETUP = '/add-tax-setup';
+  static const ADD_TAX_CODE_DATA = '/add-tax-code-data';
+  static const ADD_DEVICE_NAME = '/add-device-name';
 }
