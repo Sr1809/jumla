@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:jumla/app/common/common_picker.dart';
 
+import '../../../../common/common_appbar.dart';
 import '../../../../resources/app_colors.dart';
 import '../../../../resources/app_styles.dart';
 import '../../../../routes/app_pages.dart';
@@ -14,22 +15,7 @@ class AddTaxSetupView extends GetView<AddTaxSetupController> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.whiteColor,
-      appBar: AppBar(
-        title: Text(
-          "Tax Setup",
-          style: AppTextStyles.bold(
-            fontSize: 18.0,
-            fontColor: AppColors.whiteColor,
-          ),
-        ),
-        backgroundColor: AppColors.blueColor,
-        leading: IconButton(
-          icon: Icon(Icons.arrow_back_ios, color: AppColors.whiteColor),
-          onPressed: () {
-            Get.back();
-          },
-        ),
-      ),
+      appBar: CommonAppBar(title: 'Tax Setup',showBackButton: true,),
       body: Padding(
         padding: const EdgeInsets.all(20.0),
         child: Column(
