@@ -55,11 +55,13 @@ class AddDeviceNameView extends GetView<AddDeviceNameController> {
                       ),
                     ),
                     SizedBox(width: 10),
-                    Text(
-                      "Append device name on data exports",
-                      style: AppTextStyles.regular(
-                        fontSize: 16.0,
-                        fontColor: AppColors.blackColor,
+                    Flexible(
+                      child: Text(
+                        "Append device name on data exports",
+                        style: AppTextStyles.regular(
+                          fontSize: 16.0,
+                          fontColor: AppColors.blackColor,
+                        ),
                       ),
                     ),
                                     ],
@@ -76,7 +78,7 @@ class AddDeviceNameView extends GetView<AddDeviceNameController> {
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             Flexible(
-              child: GestureDetector(
+              child: InkWell(
                 onTap: () {
                   Get.toNamed(Routes.HOME);
                 },
@@ -92,7 +94,7 @@ class AddDeviceNameView extends GetView<AddDeviceNameController> {
             ),
             SizedBox(width: 10),
             Flexible(
-              child: GestureDetector(
+              child: InkWell(
                 onTap: () {
                   Get.back();
                 },

@@ -127,7 +127,7 @@ class AddTaxSetupView extends GetView<AddTaxSetupController> {
                   () => Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  GestureDetector(
+                  InkWell(
                     onTap: () => controller.isTaxInclusive.value = !controller.isTaxInclusive.value,
                     child: Container(
                       width: 18,
@@ -180,7 +180,7 @@ class AddTaxSetupView extends GetView<AddTaxSetupController> {
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             Flexible(
-              child: GestureDetector(
+              child: InkWell(
                 onTap: () {
                   Get.toNamed(Routes.ADD_DEVICE_NAME);
                 },
@@ -196,7 +196,7 @@ class AddTaxSetupView extends GetView<AddTaxSetupController> {
             ),
             SizedBox(width: 10),
             Flexible(
-              child: GestureDetector(
+              child: InkWell(
                 onTap: () {
                   Get.back();
                 },

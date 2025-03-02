@@ -286,7 +286,7 @@ class AddCurrencyDateFormatsView
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             Flexible(
-              child: GestureDetector(
+              child: InkWell(
                 onTap: () {
 Get.toNamed(Routes.ADD_TAX_SETUP);
                 },
@@ -302,7 +302,7 @@ Get.toNamed(Routes.ADD_TAX_SETUP);
             ),
             SizedBox(width: 10),
             Flexible(
-              child: GestureDetector(
+              child: InkWell(
                 onTap: () {
                 Get.back();
                 },

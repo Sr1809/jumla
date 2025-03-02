@@ -45,7 +45,7 @@ class CompanyInfoNoteView extends GetView<CompanyInfoNoteController> {
       bottomNavigationBar: Container(
         color: AppColors.blueColor,
         padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-        child: GestureDetector(
+        child: InkWell(
           onTap: (){
 Get.toNamed(Routes.ADD_COMPANY_NAME_ADDRESS);
           },
