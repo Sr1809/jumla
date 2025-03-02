@@ -12,7 +12,7 @@ abstract class Routes {
   static const ADD_TAX_CODE_DATA = _Paths.ADD_TAX_CODE_DATA;
   static const ADD_DEVICE_NAME = _Paths.ADD_DEVICE_NAME;
   static const CUSTOMERS = _Paths.CUSTOMERS;
-  static const ADD_DEVICE_NAME = _Paths.ADD_DEVICE_NAME;
+  // static const ADD_DEVICE_NAME = _Paths.ADD_DEVICE_NAME;
   static const DRAWER = _Paths.DRAWER;
 }
 

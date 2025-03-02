@@ -1,29 +1,34 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:jumla/app/modules/home/models/home_models.dart';
 import 'package:jumla/app/resources/app_assets.dart';
 import 'package:jumla/app/resources/app_colors.dart';
-
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:jumla/app/modules/drawer/controllers/drawer_controller.dart';
-import 'package:jumla/app/modules/home/models/home_models.dart';
 import 'package:jumla/app/resources/app_styles.dart';
 import 'package:jumla/app/routes/app_pages.dart';
-import '../../../resources/app_styles.dart';
+
 import '../../drawer/views/drawer_view.dart';
 import '../controllers/home_controller.dart';
 
 class HomeView extends GetView<HomeController> {
   HomeView({super.key});
   final HomeController homeController = Get.put(HomeController());
+  final GlobalKey<ScaffoldState> _key = GlobalKey();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        key: _key,
+        drawer: DrawerView(),
         backgroundColor: AppColors.whiteColor,
         appBar: AppBar(
           automaticallyImplyLeading: false,
           title: Row(
             children: [
-              Image.asset(AppAssets.logo, width: 100),
+              InkWell(
+                  onTap: () {
+                    _key.currentState?.openDrawer();
+                  },
+                  child: Image.asset(AppAssets.logo, width: 100)),
             ],
           ),
           backgroundColor: AppColors.blueColor,
@@ -38,6 +43,7 @@ class HomeView extends GetView<HomeController> {
               icon: Icon(Icons.menu, color: AppColors.whiteColor),
               onPressed: () {
                 // Handle menu
+                _key.currentState?.openDrawer();
               },
             ),
           ],
@@ -312,7 +318,6 @@ class HomeView extends GetView<HomeController> {
           ],
         ),
       ),
-      drawer: DrawerView(),
     );
   }
 }
