@@ -14,6 +14,8 @@ import '../modules/auth/company_info_note/bindings/company_info_note_binding.dar
 import '../modules/auth/company_info_note/views/company_info_note_view.dart';
 import '../modules/auth/login/bindings/login_binding.dart';
 import '../modules/auth/login/views/login_view.dart';
+import '../modules/drawer/bindings/drawer_binding.dart';
+import '../modules/drawer/views/drawer_view.dart';
 import '../modules/home/bindings/home_binding.dart';
 import '../modules/home/views/home_view.dart';
 
@@ -64,6 +66,11 @@ class AppPages {
       name: _Paths.ADD_DEVICE_NAME,
       page: () => const AddDeviceNameView(),
       binding: AddDeviceNameBinding(),
+    ),
+    GetPage(
+      name: _Paths.DRAWER,
+      page: () => const DrawerView(),
+      binding: DrawerBinding(),
     ),
   ];
 }
