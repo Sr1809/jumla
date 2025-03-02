@@ -1,4 +1,6 @@
 import 'package:get/get.dart';
+import 'package:jumla/app/modules/home/views/customers/bindings/customer_binding.dart';
+import 'package:jumla/app/modules/home/views/customers/views/customers_view.dart';
 
 import '../modules/auth/add_company_name_address/bindings/add_company_name_address_binding.dart';
 import '../modules/auth/add_company_name_address/views/add_company_name_address_view.dart';
@@ -22,12 +24,12 @@ part 'app_routes.dart';
 class AppPages {
   AppPages._();
 
-  static const INITIAL = Routes.LOGIN;
+  static const INITIAL = Routes.HOME;
 
   static final routes = [
     GetPage(
       name: _Paths.HOME,
-      page: () => const HomeView(),
+      page: () => HomeView(),
       binding: HomeBinding(),
     ),
     GetPage(
@@ -64,6 +66,11 @@ class AppPages {
       name: _Paths.ADD_DEVICE_NAME,
       page: () => const AddDeviceNameView(),
       binding: AddDeviceNameBinding(),
+    ),
+    GetPage(
+      name: _Paths.CUSTOMERS,
+      page: () => CustomersView(),
+      binding: CustomersBinding(),
     ),
   ];
 }
