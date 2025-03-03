@@ -14,6 +14,7 @@ abstract class Routes {
   static const CUSTOMERS = _Paths.CUSTOMERS;
   // static const ADD_DEVICE_NAME = _Paths.ADD_DEVICE_NAME;
   static const DRAWER = _Paths.DRAWER;
+  static const DROPBOX = _Paths.DROPBOX;
 }
 
 abstract class _Paths {
@@ -28,4 +29,5 @@ abstract class _Paths {
   static const ADD_DEVICE_NAME = '/add-device-name';
   static const CUSTOMERS = '/customers';
   static const DRAWER = '/drawer';
+  static const DROPBOX = '/dropbox';
 }

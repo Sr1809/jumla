@@ -14,6 +14,7 @@ class AddDeviceNameView extends GetView<AddDeviceNameController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: AppColors.whiteColor,
       appBar: CommonAppBar(title: 'Device Info',showBackButton: true,),
       body: Padding(
         padding: const EdgeInsets.all(20.0),

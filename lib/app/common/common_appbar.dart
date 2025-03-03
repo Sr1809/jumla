@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:jumla/app/core/app_storage.dart';
 import '../resources/app_colors.dart';
 import '../resources/app_styles.dart';
 
@@ -24,7 +25,7 @@ class CommonAppBar extends StatelessWidget implements PreferredSizeWidget {
           fontColor: AppColors.whiteColor,
         ),
       ),
-      backgroundColor: AppColors.blueColor,
+      backgroundColor: AppStorages.appColor.value,
       leading: showBackButton
           ? IconButton(
         icon: Icon(Icons.arrow_back_ios, color: AppColors.whiteColor),

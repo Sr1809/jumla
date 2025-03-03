@@ -9,6 +9,7 @@ class AppAssets {
   //svg path declare below
   static const String logo = '$image/logo.jpeg';
   static const String personIc = '$svg/person_ic.svg';
+  static const String dropbox = '$image/dropbox.png';
 
   static const String boxItemIc = '$svg/box_item_ic.svg';
   static const String calculatorIc = '$svg/calculator_ic.svg';

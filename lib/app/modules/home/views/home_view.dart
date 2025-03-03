@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:jumla/app/core/app_storage.dart';
 import 'package:jumla/app/modules/home/models/home_models.dart';
 import 'package:jumla/app/resources/app_assets.dart';
 import 'package:jumla/app/resources/app_colors.dart';
@@ -16,22 +17,22 @@ class HomeView extends GetView<HomeController> {
   final GlobalKey<ScaffoldState> _key = GlobalKey();
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return Obx(()=> Scaffold(
         key: _key,
         drawer: DrawerView(),
         backgroundColor: AppColors.whiteColor,
-        appBar: AppBar(
+        appBar:  AppBar(
           automaticallyImplyLeading: false,
           title: Row(
             children: [
-              InkWell(
+              AppStorages.hideCompanyLogo.value?SizedBox(): InkWell(
                   onTap: () {
                     _key.currentState?.openDrawer();
                   },
                   child: Image.asset(AppAssets.logo, width: 100)),
             ],
           ),
-          backgroundColor: AppColors.blueColor,
+          backgroundColor: AppStorages.appColor.value,
           actions: [
             IconButton(
               icon: Icon(Icons.sync, color: Colors.red),
@@ -55,7 +56,7 @@ class HomeView extends GetView<HomeController> {
             separatorBuilder: (context, index) {
               return Container();
             },
-            itemCount: controller.expandableList.length)));
+            itemCount: controller.expandableList.length))));
   }
 
   void _showPopup() {

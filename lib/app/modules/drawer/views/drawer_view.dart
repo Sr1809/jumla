@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
+import 'package:jumla/app/core/app_storage.dart';
 
+import '../../../common/common_methods.dart';
 import '../../../resources/app_colors.dart';
 import '../../../resources/app_styles.dart';
+import '../../../routes/app_pages.dart';
 import '../controllers/drawer_controller.dart';
 
 class DrawerView extends GetView<DrawersController> {
@@ -130,7 +133,13 @@ class DrawerView extends GetView<DrawersController> {
               Divider(color: Colors.black45,height: 0.5,thickness: 1,),
               buildMenuItem(Icons.storage, "Manage data", () {}),
               Divider(color: Colors.black45,height: 0.5,thickness: 1,),
-              buildMenuItem(Icons.cloud, "Dropbox", () {}),
+              buildMenuItem(Icons.cloud, "Dropbox", () {
+                Get.toNamed(Routes.DROPBOX);
+              }),
+              Divider(color: Colors.black45,height: 0.5,thickness: 1,),
+              buildMenuItem(Icons.color_lens, "UI options", () {
+                showColorPickerPopup();
+              }),
             ]),
             Divider(color: Colors.black45,height: 0.5,thickness: 0.5,),
             // Cloud Account Section
@@ -150,7 +159,9 @@ class DrawerView extends GetView<DrawersController> {
             buildExpandableMenu("ABOUT", [
               buildMenuItem(Icons.phone_android, "What's new", () {}),
               Divider(color: Colors.black45,height: 0.5,thickness: 1,),
-              buildMenuItem(Icons.mail, "Contact Us", () {}),
+              buildMenuItem(Icons.mail, "Contact Us", () {
+                //commonLaunchUrls(Uri.parse());
+              }),
               Divider(color: Colors.black45,height: 0.5,thickness: 1,),
               buildMenuItem(Icons.thumb_up, "Send review", () {}),
               Divider(color: Colors.black45,height: 0.5,thickness: 1,),
@@ -163,6 +174,109 @@ class DrawerView extends GetView<DrawersController> {
   }
 
 
+
+  void showColorPickerPopup() {
+    List<Color> colors = [
+      AppColors.blueColor, Colors.green, Colors.orange,
+      Colors.pink, Colors.grey, Colors.purple,
+      Colors.black, Colors.cyan, Colors.brown
+    ];
+
+    Rx<Color> selectedColor = AppStorages.appColor;
+    RxBool showCompanyTitle = false.obs;
+
+    Get.dialog(
+      AlertDialog(
+        title: Text("Jumla", style: AppTextStyles.bold(fontSize: 18.0, fontColor: AppColors.blueColor)),
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Divider(color: AppColors.blueColor, thickness: 2),
+            SizedBox(height: 10),
+            Row(
+              children: [
+                Text("Menu bar color", style: AppTextStyles.regular(fontSize: 16.0, fontColor: AppColors.blackColor)),
+                SizedBox(width: 10),
+                Obx(() => Container(
+                  width: 40, height: 30,
+                  decoration: BoxDecoration(
+                    color: selectedColor.value,
+                    border: Border.all(color: AppColors.blackColor, width: 1),
+                  ),
+                )),
+              ],
+            ),
+            SizedBox(height: 10),
+            GridView.builder(
+              shrinkWrap: true,
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 3,
+                crossAxisSpacing: 10,
+                mainAxisSpacing: 10,
+              ),
+              itemCount: colors.length,
+              itemBuilder: (context, index) {
+                return GestureDetector(
+                  onTap: () => selectedColor.value = colors[index],
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: colors[index],
+                      border: Border.all(color: AppColors.blackColor, width: 1),
+                    ),
+                  ),
+                );
+              },
+            ),
+            SizedBox(height: 20),
+            Obx(() => _customCheckbox("Hide Jumla logo", AppStorages.hideCompanyLogo)),
+            SizedBox(height: 10),
+            Obx(() => _customCheckbox("My company on Home title", showCompanyTitle)),
+            SizedBox(height: 10),
+            ElevatedButton(
+              onPressed: () {
+AppStorages.appColor.value = selectedColor.value;
+                Get.back();
+              },
+              style: ElevatedButton.styleFrom(
+                backgroundColor: AppColors.darkGrey,
+                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
+              ),
+              child: Text("Done", style: AppTextStyles.bold(fontSize: 16.0, fontColor: AppColors.blackColor)),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _customCheckbox(String label, RxBool value) {
+    return GestureDetector(
+      onTap: () { value.value = !value.value;
+      if(label == "Hide Jumla logo"){
+        AppStorages.hideCompanyLogo.value =value.value;
+      }
+      },
+      child: Row(
+        children: [
+          Container(
+            width: 24,
+            height: 24,
+            decoration: BoxDecoration(
+              color: AppColors.whiteColor,
+              border: Border.all(color: AppColors.blackColor, width: 2),
+              borderRadius: BorderRadius.circular(4),
+            ),
+            child: value.value ? Icon(Icons.check, color: AppColors.blueColor, size: 18) : null,
+          ),
+          SizedBox(width: 10),
+          Text(
+            label,
+            style: AppTextStyles.regular(fontSize: 14.0, fontColor: AppColors.blackColor),
+          ),
+        ],
+      ),
+    );
+  }
 
   /// **Common Method for Expandable Menus**
   Widget buildExpandableMenu(String title, List<Widget> children) {

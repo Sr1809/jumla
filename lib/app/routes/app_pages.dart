@@ -1,6 +1,4 @@
 import 'package:get/get.dart';
-import 'package:jumla/app/modules/home/views/customers/bindings/customer_binding.dart';
-import 'package:jumla/app/modules/home/views/customers/views/customers_view.dart';
 
 import '../modules/auth/add_company_name_address/bindings/add_company_name_address_binding.dart';
 import '../modules/auth/add_company_name_address/views/add_company_name_address_view.dart';
@@ -18,7 +16,11 @@ import '../modules/auth/login/bindings/login_binding.dart';
 import '../modules/auth/login/views/login_view.dart';
 import '../modules/drawer/bindings/drawer_binding.dart';
 import '../modules/drawer/views/drawer_view.dart';
+import '../modules/dropbox/bindings/dropbox_binding.dart';
+import '../modules/dropbox/views/dropbox_view.dart';
 import '../modules/home/bindings/home_binding.dart';
+import '../modules/home/views/customers/bindings/customer_binding.dart';
+import '../modules/home/views/customers/views/customers_view.dart';
 import '../modules/home/views/home_view.dart';
 
 part 'app_routes.dart';
@@ -78,6 +80,11 @@ class AppPages {
       name: _Paths.DRAWER,
       page: () => const DrawerView(),
       binding: DrawerBinding(),
+    ),
+    GetPage(
+      name: _Paths.DROPBOX,
+      page: () => const DropboxView(),
+      binding: DropboxBinding(),
     ),
   ];
 }
