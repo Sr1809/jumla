@@ -22,6 +22,8 @@ import '../modules/home/bindings/home_binding.dart';
 import '../modules/home/views/customers/bindings/customer_binding.dart';
 import '../modules/home/views/customers/views/customers_view.dart';
 import '../modules/home/views/home_view.dart';
+import '../modules/tools/manage_data/bindings/manage_data_binding.dart';
+import '../modules/tools/manage_data/views/manage_data_view.dart';
 
 part 'app_routes.dart';
 
@@ -85,6 +87,11 @@ class AppPages {
       name: _Paths.DROPBOX,
       page: () => const DropboxView(),
       binding: DropboxBinding(),
+    ),
+    GetPage(
+      name: _Paths.MANAGE_DATA,
+      page: () => const ManageDataView(),
+      binding: ManageDataBinding(),
     ),
   ];
 }

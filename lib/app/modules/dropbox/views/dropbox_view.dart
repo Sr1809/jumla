@@ -13,6 +13,7 @@ class DropboxView extends GetView<DropboxController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: AppColors.whiteColor,
       appBar: CommonAppBar(title: "Dropbox Setup"),
       body: Padding(
         padding: const EdgeInsets.all(20.0),

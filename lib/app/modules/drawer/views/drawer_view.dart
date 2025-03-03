@@ -131,13 +131,18 @@ class DrawerView extends GetView<DrawersController> {
               Divider(color: Colors.black45,height: 0.5,thickness: 1,),
               buildMenuItem(Icons.settings, "Settings", () {}),
               Divider(color: Colors.black45,height: 0.5,thickness: 1,),
-              buildMenuItem(Icons.storage, "Manage data", () {}),
+              buildMenuItem(Icons.storage, "Manage data", () {
+                Get.back();
+                Get.toNamed(Routes.MANAGE_DATA);
+              }),
               Divider(color: Colors.black45,height: 0.5,thickness: 1,),
               buildMenuItem(Icons.cloud, "Dropbox", () {
+                Get.back();
                 Get.toNamed(Routes.DROPBOX);
               }),
               Divider(color: Colors.black45,height: 0.5,thickness: 1,),
               buildMenuItem(Icons.color_lens, "UI options", () {
+                Get.back();
                 showColorPickerPopup();
               }),
             ]),
@@ -150,7 +155,9 @@ class DrawerView extends GetView<DrawersController> {
               Divider(color: Colors.black45,height: 0.5,thickness: 1,),
               buildMenuItem(Icons.cloud_upload, "Reset CLOUD data", () {}),
               Divider(color: Colors.black45,height: 0.5,thickness: 1,),
-              buildMenuItem(Icons.people, "Manage users", () {}),
+              buildMenuItem(Icons.people, "Manage users", (){
+
+              }),
               Divider(color: Colors.black45,height: 0.5,thickness: 1,),
               buildMenuItem(Icons.cloud_done, "Login to website", () {}),
             ]),
