@@ -11,6 +11,7 @@ class AppColors {
   static const blueColor = Color(0xff21487D);
   static const drawerColor = Color(0xff3B3B3B);
   static const liteGrayColor = Color(0xff5B5B5B);
+  static const buttonColor = Color(0xffE6E6E6);
 
 
 }

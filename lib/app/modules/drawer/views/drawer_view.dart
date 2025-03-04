@@ -129,7 +129,10 @@ class DrawerView extends GetView<DrawersController> {
             buildExpandableMenu("TOOLS", [
               buildMenuItem(Icons.list, "Lists", () {}),
               Divider(color: Colors.black45,height: 0.5,thickness: 1,),
-              buildMenuItem(Icons.settings, "Settings", () {}),
+              buildMenuItem(Icons.settings, "Settings", (){
+                Get.back();
+                Get.toNamed(Routes.APP_SETTINGS);
+              }),
               Divider(color: Colors.black45,height: 0.5,thickness: 1,),
               buildMenuItem(Icons.storage, "Manage data", () {
                 Get.back();

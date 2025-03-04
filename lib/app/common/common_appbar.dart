@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:jumla/app/core/app_storage.dart';
 import 'package:jumla/app/resources/app_assets.dart';
-
-
 import '../resources/app_colors.dart';
 import '../resources/app_styles.dart';
 

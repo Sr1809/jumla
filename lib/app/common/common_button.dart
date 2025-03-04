@@ -39,3 +39,45 @@ class CommonFullWidthButton extends StatelessWidget {
     );
   }
 }
+
+
+class CommonElevatedButton extends StatelessWidget {
+  final String text;
+  final VoidCallback onPressed;
+  final Color? backgroundColor;
+  final Color? textColor;
+  final double? fontSize;
+  final double? borderRadius;
+
+  CommonElevatedButton({
+    required this.text,
+    required this.onPressed,
+    this.backgroundColor,
+    this.textColor,
+    this.fontSize,
+    this.borderRadius,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return ElevatedButton(
+      onPressed: onPressed,
+
+      style: ElevatedButton.styleFrom(
+        backgroundColor: backgroundColor ?? AppColors.blueColor,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(borderRadius ?? 5),
+
+        ),
+        elevation: 0.2
+      ),
+      child: Text(
+        text,
+        style: AppTextStyles.bold(
+          fontSize: fontSize ?? 16.0,
+          fontColor: textColor ?? AppColors.whiteColor,
+        ),
+      ),
+    );
+  }
+}

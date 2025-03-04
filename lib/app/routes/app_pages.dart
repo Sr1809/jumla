@@ -1,6 +1,8 @@
 import 'package:get/get.dart';
 import 'package:jumla/app/modules/home/views/customers/bindings/customer_details_binding.dart';
 import 'package:jumla/app/modules/home/views/customers/views/customer_details_view.dart';
+import 'package:jumla/app/modules/tools/settings/app_settings/bindings/app_settings_binding.dart';
+import 'package:jumla/app/modules/tools/settings/app_settings/views/app_settings_view.dart';
 
 import '../modules/auth/add_company_name_address/bindings/add_company_name_address_binding.dart';
 import '../modules/auth/add_company_name_address/views/add_company_name_address_view.dart';
@@ -94,6 +96,12 @@ class AppPages {
       name: _Paths.MANAGE_DATA,
       page: () => const ManageDataView(),
       binding: ManageDataBinding(),
+
+    ),
+    GetPage(
+      name: _Paths.APP_SETTINGS,
+      page: () => const AppSettingsView(),
+      binding: AppSettingsBinding(),
 
     ),
   GetPage(  name: _Paths.CUSTOMER_DETAILS,

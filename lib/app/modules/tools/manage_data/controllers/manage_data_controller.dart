@@ -7,4 +7,8 @@ class ManageDataController extends GetxController {
   var sendToEmail = false.obs;
 
   TextEditingController optionalController = TextEditingController();
+
+  var selectedRecordForImport = "Choose one ..".obs;
+  var selectedFileLocation = "CSV".obs;
+  var selectedRecord = "Customers".obs;
 }

@@ -17,6 +17,7 @@ abstract class Routes {
   static const DROPBOX = _Paths.DROPBOX;
   static const MANAGE_DATA = _Paths.MANAGE_DATA;
   static const CUSTOMER_DETAILS = _Paths.CUSTOMER_DETAILS;
+  static const APP_SETTINGS = _Paths.APP_SETTINGS;
 }
 
 abstract class _Paths {
@@ -34,4 +35,5 @@ abstract class _Paths {
   static const DROPBOX = '/dropbox';
   static const MANAGE_DATA = '/manage-data';
   static const CUSTOMER_DETAILS = '/customer-details';
+  static const APP_SETTINGS = '/app-settings';
 }

@@ -8,6 +8,9 @@ import '../../../../resources/app_colors.dart';
 import '../../../../resources/app_styles.dart';
 import '../controllers/manage_data_controller.dart';
 import 'backup_database_view.dart';
+import 'export_csv.dart';
+import 'import_csv.dart';
+import 'import_iif.dart';
 
 class ManageDataView extends GetView<ManageDataController> {
   const ManageDataView({super.key});
@@ -32,9 +35,9 @@ class ManageDataView extends GetView<ManageDataController> {
             ]),
             SizedBox(height: 20),
             _buildSection("IMPORT/EXPORT", [
-              {"label": "Export CSV", "onTap": () => print("Export CSV tapped")},
-              {"label": "Import CSV", "onTap": () => print("Import CSV tapped")},
-              {"label": "Import IIF (Quickbooks)", "onTap": () => print("Import IIF tapped")},
+              {"label": "Export CSV", "onTap": () => Get.to(()=>ExportCSVScreen())},
+              {"label": "Import CSV", "onTap": () => Get.to(()=>ImportCSVScreen())},
+              {"label": "Import IIF (Quickbooks)", "onTap": () => Get.to(()=>QuickbooksImportScreen())},
             ]),
           ],
         ),
