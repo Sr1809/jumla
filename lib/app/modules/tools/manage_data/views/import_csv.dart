@@ -1,11 +1,9 @@
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
 import '../../../../common/common_appbar.dart';
 import '../../../../common/common_button.dart';
-import '../../../../resources/app_colors.dart';
 import '../../../../resources/app_styles.dart';
+import '../../../../core/app_storage.dart';
 import '../controllers/manage_data_controller.dart';
 
 class ImportCSVScreen extends StatelessWidget {
@@ -13,162 +11,183 @@ class ImportCSVScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
+    bool isTablet = screenWidth > 600;
+
+    double textSize = isTablet ? 30.0 : 18.0;
+    double paddingSize = isTablet ? 40.0 : 20.0;
+    double buttonHeight = isTablet ? 70 : 40;
+    double containerWidth = isTablet ? screenWidth * 0.7 : screenWidth * 0.9;
+
     return Scaffold(
-      backgroundColor: AppColors.whiteColor,
+      backgroundColor: Colors.white,
       appBar: CommonAppBarWithTitleAndIcon(
         title: "Import CSV",
         showBackButton: true,
         hideLogo: true,
         actions: [
           IconButton(
-            icon: Icon(Icons.close, color: AppColors.whiteColor),
+            icon: Icon(Icons.close, color: Colors.white),
             onPressed: () => Get.back(),
           ),
         ],
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(20.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-           SizedBox(
-             width: Get.width,
-             child: Column(
-               crossAxisAlignment: CrossAxisAlignment.center,
-               children: [
-                 Text(
-                   "Record to import",
-                   style: AppTextStyles.regular(fontSize: 16.0, fontColor: AppColors.blackColor),
-                 ),
-                 SizedBox(height: 10),
-                 GestureDetector(
-                   onTap: () => showRecordSelectionPopup(context, controller.selectedRecordForImport),
-                   child: Container(
+      body: Center(
+        child: Container(
+          width: containerWidth, // ✅ Responsive width
+          padding: EdgeInsets.all(paddingSize),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              /// **Record to Import Section**
+              _buildSelectionSection(
+                context,
+                title: "Record to import",
+                selectedValue: controller.selectedRecordForImport,
+                onTap: () => showRecordSelectionPopup(context, controller.selectedRecordForImport),
+                isTablet: isTablet,
+              ),
+              SizedBox(height: paddingSize / 2),
 
-                     padding: EdgeInsets.all(10),
-                     decoration: BoxDecoration(
-                       border: Border.all(color: AppColors.blackColor),
-                       borderRadius: BorderRadius.circular(5),
-                       color: AppColors.whiteColor,
-                     ),
-                     child: Obx(() => Text(
-                       controller.selectedRecordForImport.value,
-                       style: AppTextStyles.regular(fontSize: 16.0, fontColor: AppColors.blackColor),
-                     )),
-                   ),
-                 ),
-               ],
-             ),
-           ),
-            SizedBox(height: 20),
-            Row(
-              children: [
-                InkWell(
-                  onTap: (){
-                    showCSVFileLocationPopup(context, controller.selectedFileLocation);
-                  },
-                  child: Container(
-                    padding: EdgeInsets.all(10),
-                    decoration: BoxDecoration(
-                      border: Border.all(color: AppColors.blackColor),
-                      borderRadius: BorderRadius.circular(5),
+              /// **File Location Selection**
+              Row(
+                children: [
+                  InkWell(
+                    onTap: () => showRecordSelectionPopup(context, controller.selectedFileLocation),
+                    child: Container(
+                      padding: EdgeInsets.all(10),
+                      decoration: BoxDecoration(
+                        border: Border.all(color: Colors.black),
+                        borderRadius: BorderRadius.circular(5),
+                        color: Colors.white,
+                      ),
+                      child: Obx(() => Text(
+                        controller.selectedFileLocation.value,
+                        style: AppTextStyles.bold(fontSize: textSize * 0.8, fontColor: Colors.black),
+                      )),
                     ),
-                    child: Obx(()=>Text(controller.selectedFileLocation.value, style: AppTextStyles.bold(fontSize: 16.0, fontColor: AppColors.blackColor))),
                   ),
-                ),
-                SizedBox(width: 10),
-                Text("Required", style: AppTextStyles.regular(fontSize: 16.0, fontColor: Colors.red)),
-              ],
-            ),
-            SizedBox(height: 20),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                CommonElevatedButton(text: "Import One", onPressed: () {},backgroundColor: Colors.white38,textColor: AppColors.blackColor,fontSize: 12,),
-                CommonElevatedButton(text: "Import All", onPressed: () {},backgroundColor: Colors.white38,textColor: AppColors.blackColor,fontSize: 12,),
-                CommonElevatedButton(text: "Cancel", onPressed: () => Get.back(),backgroundColor: AppColors.buttonColor,textColor: AppColors.blackColor,fontSize: 12,),
-              ],
-            ),
-            SizedBox(height: 20),
-            Text(
-              "To import custom fields, simply include the custom field Label as columns on the data file.\n\nFor example, you have a custom item field called Item Weight.\n\nIf your data file includes an ITEM WEIGHT header, its value is imported into the Item Weight field of the item record.",
-              style: AppTextStyles.regular(fontSize: 14.0, fontColor: AppColors.blackColor),
-            ),
-          ],
+                  SizedBox(width: 10),
+                  Text(
+                    "Required",
+                    style: AppTextStyles.regular(fontSize: textSize * 0.8, fontColor: Colors.red),
+                  ),
+                ],
+              ),
+              SizedBox(height: paddingSize / 2),
+
+              /// **Buttons Section**
+              Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  _buildActionButton("Import One", AppStorages.appColor.value, Colors.white, isTablet),
+                  _buildActionButton("Import All", AppStorages.appColor.value, Colors.white, isTablet),
+                  _buildActionButton("Cancel",  Colors.white38, Colors.black, isTablet, () => Get.back()),
+                ],
+              ),
+              SizedBox(height: paddingSize / 2),
+
+              /// **Import Instructions**
+              Text(
+                "To import custom fields, simply include the custom field Label as columns on the data file.\n\nFor example, you have a custom item field called Item Weight.\n\nIf your data file includes an ITEM WEIGHT header, its value is imported into the Item Weight field of the item record.",
+                style: AppTextStyles.regular(fontSize: textSize * 0.7, fontColor: Colors.black),
+              ),
+            ],
+          ),
         ),
       ),
     );
   }
+
+  /// **Reusable Selection Section**
+  Widget _buildSelectionSection(BuildContext context,
+      {required String title, required RxString selectedValue, required VoidCallback onTap, required bool isTablet}) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        Text(
+          title,
+          style: AppTextStyles.regular(fontSize: isTablet ? 24.0 : 16.0, fontColor: Colors.black),
+        ),
+        SizedBox(height: 10),
+        GestureDetector(
+          onTap: onTap,
+          child: Container(
+            padding: EdgeInsets.all(10),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(5),
+              color: AppStorages.appColor.value,
+            ),
+            child: Obx(() => Text(
+              selectedValue.value,
+              style: AppTextStyles.regular(fontSize: isTablet ? 24.0 : 16.0, fontColor: Colors.white),
+            )),
+          ),
+        ),
+      ],
+    );
+  }
+
+  /// **Reusable Action Button**
+  Widget _buildActionButton(String text, Color bgColor, Color textColor, bool isTablet, [VoidCallback? onTap]) {
+    return CommonElevatedButton(
+      text: text,
+      onPressed: onTap ?? () {},
+      backgroundColor: bgColor,
+      textColor: textColor,
+      fontSize: isTablet ? 18.0 : 12.0,
+
+    );
+  }
 }
 
+/// **Popup for Record Selection**
 void showRecordSelectionPopup(BuildContext context, RxString selectedRecord) {
   List<String> records = ["Import items", "Import customers"];
 
-  Get.dialog(
-    AlertDialog(
-      title: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            "Choose one",
-            style: AppTextStyles.bold(fontSize: 18.0, fontColor: AppColors.blueColor),
-          ),
-          SizedBox(height: 5),
-          Divider(color: AppColors.blueColor, thickness: 2),
-        ],
-      ),
-      content: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: records.map((record) {
-          return Obx(() => RadioListTile<String>(
-            title: Text(record, style: AppTextStyles.regular(fontSize: 16.0, fontColor: AppColors.blackColor)),
-            value: record,
-            groupValue: selectedRecord.value,
-            activeColor: AppColors.blueColor,
-            onChanged: (value) {
-              selectedRecord.value = value!;
-              Get.back();
-            },
-          ));
-        }).toList(),
-      ),
-    ),
-  );
-}
-void showCSVFileLocationPopup(BuildContext context, RxString selectedFileLocation) {
-  List<String> locations = ["Sdcard", "Dropbox"];
+  double screenWidth = MediaQuery.of(context).size.width;
+  bool isTablet = screenWidth > 600;
+  double textSize = isTablet ? 30.0 : 18.0;
 
   Get.dialog(
-    AlertDialog(
-      title: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            "Select data file location",
-            style: AppTextStyles.bold(fontSize: 18.0, fontColor: AppColors.blueColor),
-          ),
-          SizedBox(height: 5),
-          Divider(color: AppColors.blueColor, thickness: 2),
-        ],
-      ),
-      content: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: locations.map((location) {
-          return ListTile(
-            title: Text(location, style: AppTextStyles.regular(fontSize: 16.0, fontColor: AppColors.blackColor)),
-            onTap: () {
-              selectedFileLocation.value = location;
-              Get.back();
-            },
-          );
-        }).toList(),
-      ),
-      actions: [
-        TextButton(
-          onPressed: () => Get.back(),
-          child: Text("Cancel", style: AppTextStyles.regular(fontSize: 16.0, fontColor: AppColors.blackColor)),
+    Dialog(
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+      backgroundColor: Colors.white,
+      child: Padding(
+        padding: EdgeInsets.all(isTablet ? 40 : 20), // ✅ Adjust padding based on screen size
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            /// **Title & Divider**
+            Text(
+              "Choose one",
+              style: AppTextStyles.bold(fontSize: textSize, fontColor: AppStorages.appColor.value),
+            ),
+            SizedBox(height: 5),
+            Divider(color: AppStorages.appColor.value, thickness: 2),
+            SizedBox(height: 10),
+
+            /// **Radio Buttons**
+            Column(
+              children: records.map((record) {
+                return Obx(() => RadioListTile<String>(
+                  title: Text(
+                    record,
+                    style: AppTextStyles.regular(fontSize: textSize * 0.8, fontColor: Colors.black),
+                  ),
+                  value: record,
+                  groupValue: selectedRecord.value,
+                  activeColor: AppStorages.appColor.value,
+                  onChanged: (value) {
+                    selectedRecord.value = value!;
+                    Get.back();
+                  },
+                ));
+              }).toList(),
+            ),
+          ],
         ),
-      ],
+      ),
     ),
   );
 }

@@ -11,64 +11,91 @@ import '../controllers/add_company_name_address_controller.dart';
 class AddCompanyNameAddressView
     extends GetView<AddCompanyNameAddressController> {
   const AddCompanyNameAddressView({super.key});
+
   @override
   Widget build(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
+    bool isTablet = screenWidth > 600; // Detect if the device is a tablet
+
+    double textSize = isTablet ? 30.0 : 18.0; // Adjust font size for tablets
+    double paddingSize = isTablet ? 40.0 : 0.0; // Increased padding for tablets
+    double fieldWidth = isTablet ? screenWidth * 0.7 : screenWidth; // Adjusted input field width
+
     return Scaffold(
+      backgroundColor: AppColors.whiteColor,
       appBar: AppBar(
         automaticallyImplyLeading: false,
         title: Row(
           children: [
-            Image.asset(AppAssets.logo, height: 20, width: 50),
+            Image.asset(AppAssets.logo, height: isTablet ? 50 : 30, width: isTablet ? 150 : 100),
             SizedBox(width: 10),
             Text(
               "Company name & address",
               style: AppTextStyles.bold(
-                  fontSize: 18.0, fontColor: AppColors.whiteColor),
+                  fontSize: textSize,
+                  fontColor: AppColors.whiteColor
+              ),
             ),
           ],
         ),
         backgroundColor: AppColors.blueColor,
       ),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          SizedBox(
-            height: 20,
+      body: SafeArea(
+        child: Center(
+          child: Container(
+            width: fieldWidth, // Adjust width dynamically
+            padding: EdgeInsets.all(paddingSize),
+            child: ListView(
+            //  crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                SizedBox(height: paddingSize),
+                CommonTextFieldWithTitle(
+                  label: "Company name",
+                  controller: controller.companyNameController,
+                ),
+                CommonTextFieldWithTitle(
+                  label: "Address",
+                  controller: controller.addressController,
+                ),
+                CommonTextFieldWithTitle(
+                  label: "Contact number",
+                  controller: controller.contactNumberController,
+                ),
+                CommonTextFieldWithTitle(
+                  label: "Email",
+                  controller: controller.emailController,
+                ),
+                CommonTextFieldWithTitle(
+                  label: "Website",
+                  controller: controller.websiteController,
+                  hint: "http://mycompany.com",
+                ),
+                CommonTextFieldWithTitle(
+                  label: "Slogan",
+                  controller: controller.sloganController,
+                ),
+              ],
+            ),
           ),
-          CommonTextFieldWithTitle(
-              label: "Company name",
-              controller: controller.companyNameController),
-          CommonTextFieldWithTitle(
-              label: "Address", controller: controller.addressController),
-          CommonTextFieldWithTitle(
-              label: "Contact number",
-              controller: controller.contactNumberController),
-          CommonTextFieldWithTitle(
-              label: "Email", controller: controller.emailController),
-          CommonTextFieldWithTitle(
-            label: "Website",
-            controller: controller.websiteController,
-            hint: "http://mycompany.com",
-          ),
-          CommonTextFieldWithTitle(
-              label: "Slogan", controller: controller.sloganController),
-        ],
+        ),
       ),
       bottomNavigationBar: Container(
         color: AppColors.blueColor,
-        padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+        padding: EdgeInsets.symmetric(horizontal: paddingSize, vertical: 10),
         child: InkWell(
           onTap: () {
             Get.toNamed(Routes.ADD_CURRENCY_DATE_FORMATS);
           },
           child: SizedBox(
             width: double.infinity,
-            height: 40,
+            height: isTablet ? 70 : 40, // Bigger button height for tablets
             child: Center(
               child: Text(
                 "NEXT",
                 style: AppTextStyles.bold(
-                    fontSize: 18.0, fontColor: AppColors.whiteColor),
+                  fontSize: textSize,
+                  fontColor: AppColors.whiteColor,
+                ),
               ),
             ),
           ),

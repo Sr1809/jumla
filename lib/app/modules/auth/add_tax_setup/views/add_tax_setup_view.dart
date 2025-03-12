@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:jumla/app/common/common_picker.dart';
+import 'package:jumla/app/core/app_storage.dart';
 
 import '../../../../common/common_appbar.dart';
 import '../../../../resources/app_colors.dart';
@@ -13,190 +14,149 @@ class AddTaxSetupView extends GetView<AddTaxSetupController> {
 
   @override
   Widget build(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
+    bool isTablet = screenWidth > 600; // Detect if the device is a tablet
+
+    double textSize = isTablet ? 30.0 : 18.0; // Adjust font size
+    double paddingSize = isTablet ? 40.0 : 20.0; // Adjust padding
+    double fieldWidth = isTablet ? screenWidth * 0.7 : screenWidth * 0.9; // Adjust form width
+
     return Scaffold(
       backgroundColor: AppColors.whiteColor,
-      appBar: CommonAppBar(title: 'Tax Setup',showBackButton: true,),
-      body: Padding(
-        padding: const EdgeInsets.all(20.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            GestureDetector(
-              onTap: () {
-                CommonPicker.selectTaxTypePopup(context, (v) {
-                  controller.selectedTaxType.value = v;
-                });
-                // CommonPopup.showSelectionPopup(
-                //   context: context,
-                //   title: "Select a tax type",
-                //   options: ["No tax", "One tax", "Two taxes", "Two taxes cumulative"],
-                //   onSelected: (value) => controller.selectedTaxType.value = value,
-                // );
-              },
-              child:  Container(
-                  padding: EdgeInsets.symmetric(horizontal: 10, vertical: 8),
-                  decoration: BoxDecoration(
-                    color: AppColors.whiteColor,
-                    border: Border.all(width: 1, color: AppColors.greyColor),
-                    boxShadow: [
-                      BoxShadow(
-                        color: AppColors.greyColor.withOpacity(0.3),
-                        blurRadius: 4,
-                        spreadRadius: 1,
-                        offset: Offset(2, 2),
-                      ),
-                    ],
-                  ),
-                  child: Obx(
-                    () => Text(
-                      controller.selectedTaxType.value,
-                      style: AppTextStyles.regular(
-                        fontSize: 15.0,
-                        fontColor: AppColors.blackColor,
-                      ),
-                    ),
-                  ),
-                ),
-              ),
+      appBar: CommonAppBar(title: 'Tax Setup', showBackButton: true),
 
-            SizedBox(height: 10),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
+      body: SingleChildScrollView(
+        child: Center(
+          child: Container(
+            width: fieldWidth, // Adjust width dynamically
+            padding: EdgeInsets.all(paddingSize),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Text(
-                  "Tax 1",
-                  style: AppTextStyles.regular(
-                    fontSize: 16.0,
-                    fontColor: AppColors.greyColor,
-                  ),
+                _buildSectionTitle("Select Tax Type", textSize),
+                _buildPickerBox(context, controller.selectedTaxType, () {
+                  CommonPicker.selectTaxTypePopup(context, (v) {
+                    controller.selectedTaxType.value = v;
+                  });
+                }),
+
+                SizedBox(height: paddingSize / 2),
+                _buildSectionTitle("Tax 1", textSize),
+                _buildPickerBox(context, controller.selectedTaxCode, () {
+                  showTaxCodePopup(context);
+                }),
+
+                SizedBox(height: paddingSize / 2),
+                _buildTaxInclusiveCheckbox(textSize),
+
+                Divider(color: AppColors.greyColor, thickness: 0.5),
+                _buildDescription(
+                  "This is the tax used by the company. The selected tax is applied to new transactions only.",
+                  textSize,
                 ),
-                SizedBox(width: 10),
-                GestureDetector(
-                  onTap: () {
-                    showTaxCodePopup(context);
-                  },
-                  child: Obx(
-                    () => Container(
-                      padding: EdgeInsets.symmetric(
-                        horizontal: 10,
-                        vertical: 8,
-                      ),
-                      decoration: BoxDecoration(
-                        color: AppColors.whiteColor,
-                        border: Border.all(
-                          width: 1,
-                          color: AppColors.greyColor,
-                        ),
-                        boxShadow: [
-                          BoxShadow(
-                            color: AppColors.greyColor.withOpacity(0.3),
-                            blurRadius: 4,
-                            spreadRadius: 1,
-                            offset: Offset(2, 2),
-                          ),
-                        ],
-                      ),
-                      child: Text(
-                        controller.selectedTaxCode.value,
-                        style: AppTextStyles.regular(
-                          fontSize: 15.0,
-                          fontColor: AppColors.blackColor,
-                        ),
-                      ),
-                    ),
-                  ),
+                _buildDescription(
+                  "To override this tax at the transaction level, open the transaction record > Edit > Apply tax.",
+                  textSize,
                 ),
               ],
             ),
-            SizedBox(height: 10),
-            Obx(
-                  () => Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  InkWell(
-                    onTap: () => controller.isTaxInclusive.value = !controller.isTaxInclusive.value,
-                    child: Container(
-                      width: 18,
-                      height: 18,
-                      decoration: BoxDecoration(
-                        color: AppColors.whiteColor,
-                        border: Border.all(color: AppColors.blackColor, width: 1.0),
-                        borderRadius: BorderRadius.circular(0),
-                      ),
-                      child: controller.isTaxInclusive.value
-                          ? Icon(Icons.check, color: AppColors.blueColor, size: 16)
-                          : null,
-                    ),
-                  ),
-                  SizedBox(width: 10,),
-                  Text(
-                    "Tax Inclusive Price",
-                    style: AppTextStyles.regular(
-                      fontSize: 16.0,
-                      fontColor: AppColors.blackColor,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            SizedBox(height: 10),
-            Divider(color: AppColors.greyColor,thickness: 0.5,),
-            Text(
-              "This is the tax used by the company. Selected tax is applied to new transactions only.",
-              style: AppTextStyles.regular(
-                fontSize: 14.0,
-                fontColor: AppColors.greyColor,
-              ),
-            ),
-            SizedBox(height: 10),
-            Text(
-              "To override this tax at transaction level, open the transaction record > Edit > Apply tax.",
-              style: AppTextStyles.regular(
-                fontSize: 14.0,
-                fontColor: AppColors.greyColor,
-              ),
-            ),
-          ],
+          ),
         ),
       ),
+
       bottomNavigationBar: Container(
         color: AppColors.blueColor,
         padding: EdgeInsets.symmetric(horizontal: 30, vertical: 14),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-            Flexible(
-              child: InkWell(
-                onTap: () {
-                  Get.toNamed(Routes.ADD_DEVICE_NAME);
-                },
-
-                child: Text(
-                  "NEXT",
-                  style: AppTextStyles.bold(
-                    fontSize: 16.0,
-                    fontColor: AppColors.whiteColor,
-                  ),
-                ),
-              ),
-            ),
+            _buildNavButton("NEXT", Routes.ADD_DEVICE_NAME, textSize),
             SizedBox(width: 10),
-            Flexible(
-              child: InkWell(
-                onTap: () {
-                  Get.back();
-                },
-
-                child: Text(
-                  "BACK",
-                  style: AppTextStyles.bold(
-                    fontSize: 16.0,
-                    fontColor: AppColors.whiteColor,
-                  ),
-                ),
-              ),
-            ),
+            _buildNavButton("BACK", null, textSize),
           ],
+        ),
+      ),
+    );
+  }
+
+  /// **Title for sections like "Select Tax Type", "Tax 1"**
+  Widget _buildSectionTitle(String title, double textSize) {
+    return Text(
+      title,
+      style: AppTextStyles.regular(fontSize: textSize, fontColor: AppColors.greyColor),
+    );
+  }
+
+  /// **Picker Box (For Selecting Tax Type & Tax Code)**
+  Widget _buildPickerBox(BuildContext context, RxString selectedValue, VoidCallback onTap) {
+    return GestureDetector(
+      onTap: onTap,
+      child: Obx(() => Container(
+        margin: EdgeInsets.only(top: 10),
+        padding: EdgeInsets.symmetric(horizontal: 20, vertical: 8),
+        decoration: BoxDecoration(
+          color: AppStorages.appColor.value,
+          border: Border.all(width: 1, color: AppStorages.appColor.value),
+          borderRadius: BorderRadius.circular(8.0)
+        ),
+        child: Text(
+          selectedValue.value,
+          style: AppTextStyles.regular(fontSize: 15.0, fontColor: AppColors.whiteColor),
+        ),
+      )),
+    );
+  }
+
+  /// **Tax Inclusive Checkbox**
+  Widget _buildTaxInclusiveCheckbox(double textSize) {
+    return Obx(
+          () => Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          InkWell(
+            onTap: () => controller.isTaxInclusive.value = !controller.isTaxInclusive.value,
+            child: Container(
+              width: 18,
+              height: 18,
+              decoration: BoxDecoration(
+                color: AppColors.whiteColor,
+                border: Border.all(color: AppColors.blackColor, width: 1.0),
+                borderRadius: BorderRadius.circular(0),
+              ),
+              child: controller.isTaxInclusive.value
+                  ? Icon(Icons.check, color: AppColors.blueColor, size: 16)
+                  : null,
+            ),
+          ),
+          SizedBox(width: 10),
+          Text(
+            "Tax Inclusive Price",
+            style: AppTextStyles.regular(fontSize: textSize, fontColor: AppColors.blackColor),
+          ),
+        ],
+      ),
+    );
+  }
+
+  /// **Description Text**
+  Widget _buildDescription(String text, double textSize) {
+    return Padding(
+      padding: const EdgeInsets.only(top: 10),
+      child: Text(
+        text,
+        style: AppTextStyles.regular(fontSize: textSize * 0.7, fontColor: AppColors.greyColor),
+      ),
+    );
+  }
+
+  /// **Navigation Button (NEXT / BACK)**
+  Widget _buildNavButton(String text, String? route, double textSize) {
+    return Flexible(
+      child: InkWell(
+        onTap: route != null ? () => Get.toNamed(route) : Get.back,
+        child: Text(
+          text,
+          style: AppTextStyles.bold(fontSize: textSize, fontColor: AppColors.whiteColor),
         ),
       ),
     );
@@ -223,7 +183,8 @@ class AddTaxSetupView extends GetView<AddTaxSetupController> {
               Divider(color: AppColors.blueColor, thickness: 2),
             ],
           ),
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.zero),
+          backgroundColor: AppColors.whiteColor,
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.0)),
           contentPadding: EdgeInsets.zero,
           content: Container(
             width: double.maxFinite,
@@ -231,7 +192,7 @@ class AddTaxSetupView extends GetView<AddTaxSetupController> {
               mainAxisSize: MainAxisSize.min,
               children: [
                 Obx(
-                  () => ListView.separated(
+                      () => ListView.separated(
                     shrinkWrap: true,
                     primary: true,
                     itemCount: controller.taxCodes.length,
@@ -248,7 +209,7 @@ class AddTaxSetupView extends GetView<AddTaxSetupController> {
                         ),
                         onTap: () {
                           controller.selectedTaxCode.value =
-                              controller.taxCodes[index];
+                          controller.taxCodes[index];
                           Navigator.pop(context);
                         },
                       );
@@ -269,12 +230,12 @@ class AddTaxSetupView extends GetView<AddTaxSetupController> {
                           decoration: BoxDecoration(
                             border: Border(
                               right:
-                                  index < actions.length - 1
-                                      ? BorderSide(
-                                        color: AppColors.greyColor,
-                                        width: 1,
-                                      )
-                                      : BorderSide.none,
+                              index < actions.length - 1
+                                  ? BorderSide(
+                                color: AppColors.greyColor,
+                                width: 1,
+                              )
+                                  : BorderSide.none,
                             ),
                           ),
                           child: TextButton(

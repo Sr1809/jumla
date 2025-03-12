@@ -17,6 +17,8 @@ class CommonFullWidthButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
+    bool isTablet = screenWidth > 600;
     return Container(
       color: AppStorages.appColor.value,
       padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
@@ -24,7 +26,7 @@ class CommonFullWidthButton extends StatelessWidget {
         onTap: onTap,
         child: SizedBox(
           width: double.infinity,
-          height: 35,
+          height: isTablet?50:30,
           child: Center(
             child: Text(
               text,
