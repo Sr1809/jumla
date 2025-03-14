@@ -4,6 +4,7 @@ import 'package:jumla/app/common/common_picker.dart';
 import 'package:jumla/app/core/app_storage.dart';
 
 import '../../../../common/common_appbar.dart';
+import '../../../../common/common_button.dart';
 import '../../../../resources/app_colors.dart';
 import '../../../../resources/app_styles.dart';
 import '../../../../routes/app_pages.dart';
@@ -20,6 +21,7 @@ class AddTaxSetupView extends GetView<AddTaxSetupController> {
     double textSize = isTablet ? 30.0 : 18.0; // Adjust font size
     double paddingSize = isTablet ? 40.0 : 20.0; // Adjust padding
     double fieldWidth = isTablet ? screenWidth * 0.7 : screenWidth * 0.9; // Adjust form width
+    double buttonHeight = isTablet ? 70 : 40; // Adjust button height
 
     return Scaffold(
       backgroundColor: AppColors.whiteColor,
@@ -64,15 +66,15 @@ class AddTaxSetupView extends GetView<AddTaxSetupController> {
         ),
       ),
 
-      bottomNavigationBar: Container(
+      bottomNavigationBar: Get.arguments =="setting"?CommonSaveAndNextButton(): Container(
         color: AppColors.blueColor,
         padding: EdgeInsets.symmetric(horizontal: 30, vertical: 14),
-        child: Row(
+        child:  Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-            _buildNavButton("NEXT", Routes.ADD_DEVICE_NAME, textSize),
+            _buildNavButton("NEXT", Routes.ADD_DEVICE_NAME, textSize,buttonHeight),
             SizedBox(width: 10),
-            _buildNavButton("BACK", null, textSize),
+            _buildNavButton("BACK", null, textSize,buttonHeight),
           ],
         ),
       ),
@@ -150,13 +152,19 @@ class AddTaxSetupView extends GetView<AddTaxSetupController> {
   }
 
   /// **Navigation Button (NEXT / BACK)**
-  Widget _buildNavButton(String text, String? route, double textSize) {
+  Widget _buildNavButton(String text, String? route, double textSize, double buttonHeight) {
     return Flexible(
       child: InkWell(
         onTap: route != null ? () => Get.toNamed(route) : Get.back,
-        child: Text(
-          text,
-          style: AppTextStyles.bold(fontSize: textSize, fontColor: AppColors.whiteColor),
+        child: SizedBox(
+          width: double.infinity,
+          height: buttonHeight,
+          child: Center(
+            child: Text(
+              text,
+              style: AppTextStyles.bold(fontSize: textSize, fontColor: AppColors.whiteColor),
+            ),
+          ),
         ),
       ),
     );

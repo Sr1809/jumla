@@ -82,4 +82,46 @@ class CommonElevatedButton extends StatelessWidget {
       ),
     );
   }
+
+
+
 }
+
+class CommonSaveAndNextButton extends StatelessWidget {
+
+
+  @override
+  Widget build(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
+    bool isTablet = screenWidth > 600; // Detect if the device is a tablet
+
+    double textSize = isTablet ? 28.0 : 16.0; // Adjust font size
+    double paddingSize = isTablet ? 40.0 : 20.0; // Adjust padding
+    double buttonHeight = isTablet ? 70 : 40;
+    return Container(
+      height: buttonHeight,
+      padding: EdgeInsets.symmetric(horizontal: paddingSize),
+      decoration: BoxDecoration(
+        color: AppStorages.appColor.value,
+        borderRadius: BorderRadius.only(topLeft: Radius.circular(10), topRight: Radius.circular(10)),
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          IconButton(
+            icon: Icon(Icons.save, color: Colors.white, size: textSize),
+            onPressed: () => Get.back(),
+          ),
+          IconButton(
+            icon: Icon(Icons.close, color: Colors.white, size: textSize),
+            onPressed: () => Get.back(),
+          ),
+        ],
+      ),
+    );
+  }
+
+
+
+}
+

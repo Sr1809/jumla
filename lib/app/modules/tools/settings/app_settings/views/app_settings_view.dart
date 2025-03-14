@@ -1,9 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:jumla/app/modules/tools/settings/app_settings/views/paypal_setup_view.dart';
+import 'package:jumla/app/modules/tools/settings/app_settings/views/project_setting.dart';
+import 'package:jumla/app/modules/tools/settings/app_settings/views/tax_code_view.dart';
 import '../../../../../common/common_appbar.dart';
 import '../../../../../resources/app_styles.dart';
 import '../../../../../core/app_storage.dart';
+import '../../../../../routes/app_pages.dart';
 import '../controllers/app_settings_controller.dart';
+import 'company_name_and_address.dart';
+import 'companyy_logo_view.dart';
+import 'default_status_view.dart';
+import 'default_terms.dart';
+import 'manage_company_view.dart';
 
 class AppSettingsView extends GetView<AppSettingsController> {
   const AppSettingsView({super.key});
@@ -16,8 +25,7 @@ class AppSettingsView extends GetView<AppSettingsController> {
     double textSize = isTablet ? 30.0 : 18.0;
     double paddingSize = isTablet ? 40.0 : 20.0;
     double containerWidth =  screenWidth;
-    double checkboxSize = isTablet ? 40 : 24;
-    double checkboxIconSize = isTablet ? 30 : 20;
+
 
     return Scaffold(
       backgroundColor: Colors.white,
@@ -42,24 +50,24 @@ class AppSettingsView extends GetView<AppSettingsController> {
               children: [
                 /// **Company Settings**
                 _buildSection("COMPANY SETTINGS", textSize, [
-                  _buildTapableItem("Company Name & Address", "Basic info about your company", () {}),
-                  _buildTapableItem("Company Logo", "Set the logo that appears on printouts", () {}),
-                  _buildTapableItem("Currency & Date Formats", "Set how currencies and dates are formatted", () {}),
-                  _buildTapableItem("PayPal", "Configure to show PayPal links on invoices and emails", () {}),
-                  _buildTapableItem("Manage Companies", "Add, remove, or switch to a different company", () {}),
+                  _buildTapableItem("Company Name & Address", "Basic info about your company", ()=>Get.to(()=>CompanyInfoView())),
+                  _buildTapableItem("Company Logo", "Set the logo that appears on printouts", () =>Get.to(()=>CompanyLogoScreen())),
+                  _buildTapableItem("Currency & Date Formats", "Set how currencies and dates are formatted", ()=>Get.toNamed(Routes.ADD_CURRENCY_DATE_FORMATS,arguments: "setting")),
+                  _buildTapableItem("PayPal", "Configure to show PayPal links on invoices and emails", ()=>Get.to(()=>PayPalSetupScreen())),
+                  _buildTapableItem("Manage Companies", "Add, remove, or switch to a different company", ()=>Get.to(()=>ManageCompaniesScreen())),
                 ]),
 
                 /// **Device Settings**
                 _buildSection("DEVICE INFO", textSize, [
-                  _buildTapableItem("Device Name", "Give your device a name", () {}),
+                  _buildTapableItem("Device Name", "Give your device a name",()=>Get.toNamed(Routes.ADD_DEVICE_NAME,arguments: "setting")),
                   _buildCheckboxItem("Use Screen Unlock", "If checked, a PIN is required to open the app", controller.useScreenUnlock),
                   _buildTapableItem("Set Up PIN", "Enter or reset your PIN number", () {}),
                 ]),
 
                 /// **Taxes**
                 _buildSection("TAXES", textSize, [
-                  _buildTapableItem("One Tax", "Tax type", () {}),
-                  _buildTapableItem("Manage Tax Codes", "Create or modify pre-defined tax codes", () {}),
+                  _buildTapableItem("One Tax", "Tax type", ()=>Get.toNamed(Routes.ADD_TAX_SETUP,arguments: "setting")),
+                  _buildTapableItem("Manage Tax Codes", "Create or modify pre-defined tax codes", () =>Get.to(()=>TaxCodesScreen())),
                 ]),
 
                 /// **Transaction Numbers**
@@ -74,12 +82,12 @@ class AppSettingsView extends GetView<AppSettingsController> {
 
                 /// **Invoicing**
                 _buildSection("INVOICING", textSize, [
-                  _buildTapableItem("Default Terms", "Set the number of days when a quote expires or an invoice becomes due", () {}),
-                  _buildTapableItem("Default Statuses", "Set the default status when orders and quotes are created", () {}),
+                  _buildTapableItem("Default Terms", "Set the number of days when a quote expires or an invoice becomes due", ()=>Get.to(()=>DefaultTermsView())),
+                  _buildTapableItem("Default Statuses", "Set the default status when orders and quotes are created", ()=>Get.to(()=>DefaultStatusScreen())),
                   _buildCheckboxItem("Discount Before Tax", "On new transactions, discounts are applied before tax is calculated.", controller.discountBeforeTax, ),
                   _buildCheckboxItem("No Dates on Notes", "When printing public notes, don't show the date.", controller.noDatesOnNotes,),
                   _buildCheckboxItem("Create Note After Email/SMS", "After sending a transaction by email or SMS, create a note.", controller.createNoteAfterEmailSms, ),
-                  _buildTapableItem("Projects", "Ability to create projects for customers and assign them to invoices", () {}),
+                  _buildTapableItem("Projects", "Ability to create projects for customers and assign them to invoices", ()=>Get.to(()=>ProjectSettingsScreen())),
                   _buildTapableItem("Signatures", "Ability to capture signatures on invoices", () {}),
                   _buildTapableItem("Recurring Transactions", "Setup repetitive transactions and auto-create them on a schedule", () {}),
                 ]),

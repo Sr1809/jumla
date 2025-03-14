@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../../common/common_appbar.dart';
+import '../../../../common/common_button.dart';
 import '../../../../common/common_text_field.dart';
+import '../../../../core/app_storage.dart';
 import '../../../../resources/app_colors.dart';
 import '../../../../resources/app_styles.dart';
 import '../../../../routes/app_pages.dart';
@@ -80,9 +82,10 @@ class AddDeviceNameView extends GetView<AddDeviceNameController> {
         ),
       ),
 
-      bottomNavigationBar: Container(
+      bottomNavigationBar: Get.arguments =="setting"?CommonSaveAndNextButton(): Container(
         color: AppColors.blueColor,
-        padding: EdgeInsets.symmetric(horizontal: 30, vertical: 5),
+        padding: EdgeInsets.symmetric(horizontal: 30, vertical: 14),
+
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [

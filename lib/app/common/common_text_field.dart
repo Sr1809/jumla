@@ -210,20 +210,20 @@ class CommonTextFieldWithTitle extends StatelessWidget {
                     fillColor: Colors.white, // Clear contrast against text
                     contentPadding: EdgeInsets.symmetric(vertical: paddingVertical, horizontal: 16),
                     prefixIcon: prefixIcon != null
-                        ? Icon(prefixIcon, color: AppColors.blueColor, size: iconSize)
+                        ? Icon(prefixIcon, color: AppStorages.appColor.value, size: iconSize)
                         : null,
                     suffixIcon: suffixIcon != null
                         ? GestureDetector(
                       onTap: onSuffixTap,
-                      child: Icon(suffixIcon, color: AppColors.blueColor, size: iconSize),
+                      child: Icon(suffixIcon, color: AppStorages.appColor.value, size: iconSize),
                     )
                         : null,
                     enabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: AppColors.blueColor, width: 1.2),
+                      borderSide: BorderSide(color: AppStorages.appColor.value, width: 1.2),
                       borderRadius: BorderRadius.circular(borderRadius),
                     ),
                     focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: AppColors.blueColor, width: 1.5),
+                      borderSide: BorderSide(color: AppStorages.appColor.value, width: 1.5),
                       borderRadius: BorderRadius.circular(borderRadius),
                     ),
                   ),

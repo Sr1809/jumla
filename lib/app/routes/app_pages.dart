@@ -104,7 +104,7 @@ class AppPages {
       binding: AppSettingsBinding(),
 
     ),
-  GetPage(  name: _Paths.CUSTOMER_DETAILS,
+    GetPage(  name: _Paths.CUSTOMER_DETAILS,
     page: () => CustomersDetailsView(),
     binding: CustomersDetailsBinding(),)
   ];
