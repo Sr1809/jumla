@@ -88,7 +88,7 @@ class AddCompanyNameAddressView
           },
           child: SizedBox(
             width: double.infinity,
-            height: isTablet ? 70 : 40, // Bigger button height for tablets
+            height: isTablet ? 70 : 30, // Bigger button height for tablets
             child: Center(
               child: Text(
                 "NEXT",

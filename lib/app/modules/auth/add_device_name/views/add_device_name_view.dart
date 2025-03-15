@@ -17,11 +17,11 @@ class AddDeviceNameView extends GetView<AddDeviceNameController> {
     double screenWidth = MediaQuery.of(context).size.width;
     bool isTablet = screenWidth > 600; // Detect if the device is a tablet
 
-    double textSize = isTablet ? 28.0 : 16.0; // Adjust font size
+    double textSize = isTablet ? 28.0 : 18.0; // Adjust font size
     double paddingSize = isTablet ? 40.0 : 20.0; // Adjust padding
     double fieldWidth = isTablet ? screenWidth * 0.7 : screenWidth ; // Adjust form width
     double appBarTextSize = isTablet ? 30.0 : 18.0; // Adjust AppBar text size
-    double buttonHeight = isTablet ? 70 : 40; // Adjust button height
+    double buttonHeight = isTablet ? 70 : 30; // Adjust button height
 
     return Scaffold(
       backgroundColor: AppColors.whiteColor,
@@ -84,7 +84,7 @@ class AddDeviceNameView extends GetView<AddDeviceNameController> {
 
       bottomNavigationBar: Get.arguments =="setting"?CommonSaveAndNextButton(): Container(
         color: AppColors.blueColor,
-        padding: EdgeInsets.symmetric(horizontal: 30, vertical: 14),
+        padding: EdgeInsets.symmetric(horizontal: 30, vertical: 10),
 
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,

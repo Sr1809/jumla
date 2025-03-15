@@ -60,7 +60,7 @@ class CompanyInfoNoteView extends GetView<CompanyInfoNoteController> {
           },
           child: SizedBox(
             width: double.infinity,
-            height: isTablet ? 70 : 40, // Slightly bigger button on tablets
+            height: isTablet ? 70 : 30, // Slightly bigger button on tablets
             child: Center(
               child: Text(
                 "NEXT",

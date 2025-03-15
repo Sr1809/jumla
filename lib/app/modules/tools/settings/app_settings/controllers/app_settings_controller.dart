@@ -11,6 +11,7 @@ class AppSettingsController extends GetxController {
   var noDeleteOfTransactions = false.obs;
   var useItemPictures = false.obs;
 
+  final RxString selectedItem = "".obs;
 
 
 

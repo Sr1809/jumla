@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:jumla/app/modules/tools/settings/app_settings/views/paypal_setup_view.dart';
+import 'package:jumla/app/modules/tools/settings/app_settings/views/pdf_option_view.dart';
 import 'package:jumla/app/modules/tools/settings/app_settings/views/project_setting.dart';
+import 'package:jumla/app/modules/tools/settings/app_settings/views/recurring_transactions_view.dart';
+import 'package:jumla/app/modules/tools/settings/app_settings/views/signature_setting.dart';
 import 'package:jumla/app/modules/tools/settings/app_settings/views/tax_code_view.dart';
+import 'package:jumla/app/modules/tools/settings/app_settings/views/watermark_view.dart';
 import '../../../../../common/common_appbar.dart';
+import '../../../../../resources/app_colors.dart';
 import '../../../../../resources/app_styles.dart';
 import '../../../../../core/app_storage.dart';
 import '../../../../../routes/app_pages.dart';
@@ -12,7 +17,10 @@ import 'company_name_and_address.dart';
 import 'companyy_logo_view.dart';
 import 'default_status_view.dart';
 import 'default_terms.dart';
+import 'file_name_view.dart';
+import 'language_output_view.dart';
 import 'manage_company_view.dart';
+import 'override_label_date_view.dart';
 
 class AppSettingsView extends GetView<AppSettingsController> {
   const AppSettingsView({super.key});
@@ -88,21 +96,21 @@ class AppSettingsView extends GetView<AppSettingsController> {
                   _buildCheckboxItem("No Dates on Notes", "When printing public notes, don't show the date.", controller.noDatesOnNotes,),
                   _buildCheckboxItem("Create Note After Email/SMS", "After sending a transaction by email or SMS, create a note.", controller.createNoteAfterEmailSms, ),
                   _buildTapableItem("Projects", "Ability to create projects for customers and assign them to invoices", ()=>Get.to(()=>ProjectSettingsScreen())),
-                  _buildTapableItem("Signatures", "Ability to capture signatures on invoices", () {}),
-                  _buildTapableItem("Recurring Transactions", "Setup repetitive transactions and auto-create them on a schedule", () {}),
+                  _buildTapableItem("Signatures", "Ability to capture signatures on invoices", ()=>Get.to(()=>SignatureSettingsScreen())),
+                  _buildTapableItem("Recurring Transactions", "Setup repetitive transactions and auto-create them on a schedule", ()=>Get.to(()=>RecurringTransactionsScreen())),
                 ]),
                 _buildSection("PRINTING", textSize, [
-                  _buildTapableItem("Language Output", "Select the language to use for print output", () {}),
-                  _buildTapableItem("Sale Totals", "Modify how totals are shown on printouts", () {}),
-                  _buildTapableItem("Sale Columns", "Modify how line items are shown on printouts", () {}),
-                  _buildTapableItem("Extra Grid", "Show more info above invoice lines", () {}),
+                  _buildTapableItem("Language Output", "Select the language to use for print output", ()=>Get.to(()=>LanguageOutputScreen())),
+                  _buildTapableItem("Sale Totals", "Modify how totals are shown on printouts", ()=>showSaleTotalsPopup()),
+                  _buildTapableItem("Sale Columns", "Modify how line items are shown on printouts", ()=>showSaleTotalsPopup()),
+                  _buildTapableItem("Extra Grid", "Show more info above invoice lines", ()=>showSaleTotalsPopup()),
                   _buildTapableItem("Other Template Areas", "Bill To, Ship To, Payment Details, etc.", () {}),
-                  _buildTapableItem("Override Labels & Dates", "Changes here affect only printouts", () {}),
+                  _buildTapableItem("Override Labels & Dates", "Changes here affect only printouts", ()=>Get.to(()=>OverrideLabelsScreen())),
                 ]),
                 _buildSection("DOCUMENT", textSize, [
-                  _buildTapableItem("PDF Options", "PDF page size, orientation, and security", () {}),
-                  _buildTapableItem("File Names", "Control how generated PDF files are named", () {}),
-                  _buildTapableItem("Watermark", "Show watermark based on transaction status", () {}),
+                  _buildTapableItem("PDF Options", "PDF page size, orientation, and security", ()=>Get.to(()=>PdfOptionsScreen())),
+                  _buildTapableItem("File Names", "Control how generated PDF files are named", ()=>Get.to(()=>FileNamesScreen())),
+                  _buildTapableItem("Watermark", "Show watermark based on transaction status", ()=>Get.to(()=>WatermarkSettingsScreen())),
                 ]),
                 _buildSection("INVENTORY", textSize, [
                   _buildCheckboxItem("Show Available Items Only", "Show only items with available stock", controller.showAvailableItemsOnly),
@@ -116,18 +124,89 @@ class AppSettingsView extends GetView<AppSettingsController> {
 
                 /// **External Services**
                 _buildSection("EXTERNAL SERVICES", textSize, [
-                  _buildTapableItem("Dropbox", "Enable access to Dropbox", () {}),
+                  _buildTapableItem("Dropbox", "Enable access to Dropbox", ()=>Get.toNamed(Routes.DROPBOX)),
                 ]),
 
                 /// **Items**
                 _buildSection("ITEMS", textSize, [
                   _buildCheckboxItem("Use Item Pictures", "If checked, item records can add/display pictures.", controller.useItemPictures, ),
-                  _buildTapableItem("Item Type", "Set the default type when adding new items", () {}),
+                  _buildTapableItem("Item Type", "Set the default type when adding new items", ()=>showItemTypeDialog()),
 
                 ]),
               ],
             ),
           ),
+        ),
+      ),
+    );
+  }
+
+
+
+  void showItemTypeDialog() {
+    Get.defaultDialog(
+      title: "Choose an item type",
+      titleStyle: AppTextStyles.bold(
+        fontSize: 18.0,
+        fontColor: AppStorages.appColor.value,
+      ),
+      backgroundColor: AppColors.whiteColor,
+      contentPadding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+      content: Column(
+        children: [
+          Divider(color: AppStorages.appColor.value, thickness: 1),
+          Column(
+            children: [
+              _buildItemTypeTile("Non-inventory Item"),
+              _buildItemTypeTile("Inventory Item"),
+              _buildItemTypeTile("Service Item"),
+              _buildItemTypeTile("Shipping Item"),
+              _buildItemTypeTile("Description Item"),
+            ],
+          ),
+          SizedBox(height: 10),
+          TextButton(
+            onPressed: () => Get.back(),
+            child: Text(
+              "Cancel",
+              style: AppTextStyles.regular(fontSize: 16.0, fontColor: AppColors.blackColor),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildItemTypeTile(String title) {
+    return InkWell(
+      onTap: () {
+        Get.back(result: title);
+      },
+      child: Padding(
+        padding: EdgeInsets.symmetric(vertical: 0, horizontal: 10),
+        child: Row(
+          children: [
+            Expanded(
+              child: Text(
+                title,
+                style: AppTextStyles.regular(
+                  fontSize: 16.0,
+                  fontColor: AppColors.blackColor,
+                ),
+              ),
+            ),
+            Obx(
+                  () => Radio(
+                value: title,
+                groupValue: controller.selectedItem.value,
+                activeColor: AppStorages.appColor.value,
+                onChanged: (value) {
+                  controller. selectedItem.value = value as String;
+                  Get.back(result: value);
+                },
+              ),
+            ),
+          ],
         ),
       ),
     );
@@ -211,6 +290,53 @@ class AppSettingsView extends GetView<AppSettingsController> {
         ),
       ),
     ));
+  }
+
+
+  void showSaleTotalsPopup() {
+    Get.dialog(
+      Dialog(
+        backgroundColor: Colors.white,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+        child: Padding(
+          padding: const EdgeInsets.all(20.0),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Text(
+                "Sale totals",
+                style: AppTextStyles.bold(fontSize: 20.0, fontColor: AppStorages.appColor.value),
+              ),
+              Divider(color: AppStorages.appColor.value, thickness: 1),
+              ...[
+                "On quotes",
+                "On sales orders",
+                "On invoices",
+                "On cash sales",
+                "On purchase orders"
+              ].map((option) =>  ListTile(
+                title: Text(
+                  option,
+                  style: AppTextStyles.regular(fontSize: 18.0, fontColor: Colors.black),
+                ),
+                subtitle: Text(
+                  "Customize sale totals on $option",
+                  style: AppTextStyles.regular(fontSize: 14.0, fontColor: Colors.grey),
+                ),
+                onTap: () => Get.back(),
+              )).toList(),
+              Align(
+                alignment: Alignment.centerRight,
+                child: TextButton(
+                  onPressed: () => Get.back(),
+                  child: Text("Cancel", style: TextStyle(color: AppStorages.appColor.value)),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
   }
 
 }

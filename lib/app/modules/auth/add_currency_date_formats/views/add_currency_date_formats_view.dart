@@ -25,7 +25,7 @@ class AddCurrencyDateFormatsView
     double paddingSize = isTablet ? 40.0 : 20.0; // Adjust padding for tablets
     double fieldWidth =
         isTablet ? screenWidth * 0.7 : screenWidth; // Adjust form width
-    double buttonHeight = isTablet ? 70 : 40;
+    double buttonHeight = isTablet ? 70 : 30;
 
     return Scaffold(
       backgroundColor: AppColors.whiteColor,
@@ -105,7 +105,7 @@ class AddCurrencyDateFormatsView
           ? CommonSaveAndNextButton()
           : Container(
               color: AppColors.blueColor,
-              padding: EdgeInsets.symmetric(horizontal: 30, vertical: 14),
+              padding: EdgeInsets.symmetric(horizontal: 30, vertical: 10),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [

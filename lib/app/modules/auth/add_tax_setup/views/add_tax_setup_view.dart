@@ -21,7 +21,7 @@ class AddTaxSetupView extends GetView<AddTaxSetupController> {
     double textSize = isTablet ? 30.0 : 18.0; // Adjust font size
     double paddingSize = isTablet ? 40.0 : 20.0; // Adjust padding
     double fieldWidth = isTablet ? screenWidth * 0.7 : screenWidth * 0.9; // Adjust form width
-    double buttonHeight = isTablet ? 70 : 40; // Adjust button height
+    double buttonHeight = isTablet ? 70 : 30; // Adjust button height
 
     return Scaffold(
       backgroundColor: AppColors.whiteColor,
@@ -68,7 +68,7 @@ class AddTaxSetupView extends GetView<AddTaxSetupController> {
 
       bottomNavigationBar: Get.arguments =="setting"?CommonSaveAndNextButton(): Container(
         color: AppColors.blueColor,
-        padding: EdgeInsets.symmetric(horizontal: 30, vertical: 14),
+        padding: EdgeInsets.symmetric(horizontal: 30, vertical: 10),
         child:  Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
