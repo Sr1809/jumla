@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:jumla/app/resources/app_colors.dart';
 import '../../../../../common/common_appbar.dart';
 import '../../../../../resources/app_styles.dart';
 import '../../../../../core/app_storage.dart';
@@ -79,13 +80,18 @@ class CompanyLogoScreen extends GetView<AppSettingsController> {
           "Picture Options",
           style: AppTextStyles.bold(fontSize: 18.0, fontColor: Colors.blue),
         ),
+        backgroundColor: AppColors.whiteColor,
         content: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
             _buildOption("View Full Picture", ),
+            Divider(),
             _buildOption("Take Picture", ),
+            Divider(),
             _buildOption("Get from Gallery",),
+            Divider(),
             _buildOption("Remove Logo",),
+            Divider(),
           ],
         ),
         actions: [

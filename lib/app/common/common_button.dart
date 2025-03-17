@@ -103,17 +103,17 @@ class CommonSaveAndNextButton extends StatelessWidget {
       padding: EdgeInsets.symmetric(horizontal: paddingSize),
       decoration: BoxDecoration(
         color: AppStorages.appColor.value,
-        borderRadius: BorderRadius.only(topLeft: Radius.circular(10), topRight: Radius.circular(10)),
+        borderRadius: BorderRadius.only(topLeft: Radius.circular(16), topRight: Radius.circular(16)),
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           IconButton(
-            icon: Icon(Icons.save, color: Colors.white, size: textSize),
+            icon: Icon(Icons.save, color: Colors.white,),
             onPressed: () => Get.back(),
           ),
           IconButton(
-            icon: Icon(Icons.close, color: Colors.white, size: textSize),
+            icon: Icon(Icons.close, color: Colors.white),
             onPressed: () => Get.back(),
           ),
         ],

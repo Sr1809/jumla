@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:jumla/app/core/app_storage.dart';
 import 'package:jumla/app/routes/app_pages.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../../../../common/common_text_field.dart';
+import '../../../../common/common_widget.dart';
 import '../../../../resources/app_colors.dart';
 import '../../../../resources/app_styles.dart';
 import '../controllers/login_controller.dart';
@@ -106,6 +108,7 @@ class LoginView extends GetWidget<LoginController> {
 // "Create an account" - Looks like a soft button
               _buildLiteButton("Create an account", textSize, () {
                 // Handle Create Account
+                launchUrls(Uri.parse("https://system.mobilebizco.com/app/signup"));
               }, isBold: true),
 
               SizedBox(height: 20),
@@ -113,6 +116,7 @@ class LoginView extends GetWidget<LoginController> {
 // "Forgot password" - Same button style
               _buildLiteButton("Forgot password", textSize, () {
                 // Handle Forgot Password
+                launchUrls(Uri.parse("https://system.mobilebizco.com/app/password?ccd=17788"));
               }),
             ],
           ),
@@ -187,4 +191,7 @@ class LoginView extends GetWidget<LoginController> {
       ),
     );
   }
+
+
+
 }

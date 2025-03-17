@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../../../common/common_appbar.dart';
+import '../../../../../resources/app_colors.dart';
 import '../../../../../resources/app_styles.dart';
 import '../../../../../core/app_storage.dart';
 
@@ -91,6 +92,7 @@ class DefaultStatusScreen extends StatelessWidget {
       builder: (context) {
         return AlertDialog(
           title: Text(title, style: AppTextStyles.bold(fontSize: 22.0, fontColor: AppStorages.appColor.value)),
+          backgroundColor: AppColors.whiteColor,
           content: Column(
             mainAxisSize: MainAxisSize.min,
             children: options.map((option) {

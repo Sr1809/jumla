@@ -3,9 +3,13 @@ import 'package:get/get.dart';
 import 'package:jumla/app/core/app_storage.dart';
 
 import '../../../common/common_methods.dart';
+import '../../../common/common_widget.dart';
 import '../../../resources/app_colors.dart';
 import '../../../resources/app_styles.dart';
 import '../../../routes/app_pages.dart';
+import '../../cloud_account/reser_device_data.dart';
+import '../../cloud_account/reset_cloud_data_view.dart';
+import '../../cloud_account/sync_options_view.dart';
 import '../controllers/drawer_controller.dart';
 
 class DrawerView extends GetView<DrawersController> {
@@ -74,7 +78,10 @@ class DrawerView extends GetView<DrawersController> {
 
               /// **Tools Section**
               _buildExpandableMenu("TOOLS", [
-                _buildMenuItem(Icons.list, "Lists", () {}),
+                _buildMenuItem(Icons.list, "Lists", (){
+                  Get.back();
+                  Get.toNamed(Routes.LISTS);
+                }),
                 _buildMenuItem(Icons.settings, "Settings", () {
                   Get.back();
                   Get.toNamed(Routes.APP_SETTINGS);
@@ -91,15 +98,47 @@ class DrawerView extends GetView<DrawersController> {
                   showColorPickerPopup();
                 }),
               ]),
+              Divider(color: AppStorages.appColor.value, height: 20, thickness: dividerThickness),
+              _buildSectionHeader("CLOUD ACCOUNT", textSize),
+              _buildMenuItem(Icons.sync, "Sync options", () {
+                Get.to(()=>SyncOptionsView());
+              }),
+              _buildMenuItem(Icons.refresh, "Reset DEVICE data", () {
+                Get.to(()=>ResetDeviceDataView());
+
+              }),
+              _buildMenuItem(Icons.cloud_done, "Reset CLOUD data", () {
+                Get.to(()=>ResetCloudDataView());
+
+              }),
+              _buildMenuItem(Icons.people, "Manage users", () {
+                launchUrls(Uri.parse("https://system.mobilebizco.com/app/login"));
+              }),
+              _buildMenuItem(Icons.web, "Login to website", () {
+                launchUrls(Uri.parse("https://system.mobilebizco.com/app/login"));
+              }),
+
 
               Divider(color: AppStorages.appColor.value, height: 20, thickness: dividerThickness),
 
               /// **About Section**
               _buildExpandableMenu("ABOUT", [
-                _buildMenuItem(Icons.phone_android, "What's new", () {}),
-                _buildMenuItem(Icons.mail, "Contact Us", () {}),
-                _buildMenuItem(Icons.thumb_up, "Send review", () {}),
-                _buildMenuItem(Icons.lightbulb, "Help", () {}),
+                _buildMenuItem(Icons.phone_android, "What's new", ()=>Get.toNamed(Routes.WHATS_NEW)),
+                _buildMenuItem(Icons.mail, "Contact Us", () {
+                  final Uri emailUri = Uri(
+                    scheme: 'mailto',
+                    path: "info@mobilebizco.com",
+                    queryParameters: {
+                    },
+                  );
+                  launchUrls(emailUri);
+                }),
+                _buildMenuItem(Icons.thumb_up, "Send review", () {
+
+                }),
+                _buildMenuItem(Icons.lightbulb, "Help", (){
+                  launchUrls(Uri.parse("https://support.mobilebizco.com/"));
+                }),
               ]),
             ],
           ),
@@ -201,13 +240,14 @@ class DrawerView extends GetView<DrawersController> {
   Widget _buildExpandableMenu(String title, List<Widget> children) {
     return Theme(
       data: Theme.of(Get.context!).copyWith(
-        dividerColor: Colors.transparent, // ✅ Removes the top and bottom divider
+        dividerColor: Colors.transparent,
       ),
       child: ExpansionTile(
         title: Text(
           title,
           style: AppTextStyles.bold(fontSize: 16.0, fontColor: AppStorages.appColor.value),
         ),
+        initiallyExpanded:true,
         children: children,
         collapsedIconColor: AppStorages.appColor.value,
         iconColor: AppStorages.appColor.value,

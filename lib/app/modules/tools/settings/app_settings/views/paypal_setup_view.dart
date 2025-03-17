@@ -28,32 +28,9 @@ Widget build(BuildContext context) {
       showBackButton: true,
       hideLogo: true,
       actions: [
-        IconButton(icon: Icon(Icons.save), onPressed: ()=>Get.back()),
       ],
     ),
-    bottomNavigationBar: Container(
-      height: buttonHeight,
-      padding: EdgeInsets.symmetric(horizontal: paddingSize),
-      decoration: BoxDecoration(
-        color: AppStorages.appColor.value,
-        borderRadius: BorderRadius.only(topLeft: Radius.circular(10), topRight: Radius.circular(10)),
-      ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          IconButton(
-            icon: Icon(Icons.save, color: Colors.white, size: textSize),
-            onPressed: () {
-              // controller.saveChanges();
-            },
-          ),
-          IconButton(
-            icon: Icon(Icons.close, color: Colors.white, size: textSize),
-            onPressed: () => Get.back(),
-          ),
-        ],
-      ),
-    ),
+    bottomNavigationBar: CommonSaveAndNextButton(),
     body: Padding(
       padding: EdgeInsets.all(paddingSize),
       child: SingleChildScrollView(
@@ -138,7 +115,7 @@ Widget _buildDropdownField(String label, String value, VoidCallback onTap) {
 /// **Reusable Condition Text**
 Widget _buildConditionText(String text) {
   return Padding(
-    padding: EdgeInsets.only(left: 100, bottom: 5),
+    padding: EdgeInsets.only(left: 0, bottom: 5),
     child: Row(
       children: [
         Icon(Icons.check_circle, color: AppStorages.appColor.value, size: 18),

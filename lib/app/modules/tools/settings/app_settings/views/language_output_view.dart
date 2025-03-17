@@ -66,21 +66,28 @@ class LanguageOutputScreen extends StatelessWidget {
   }
 
   void _showLanguagePopup(BuildContext context) {
-    Get.defaultDialog(
-      title: "Select a language",
-      titleStyle: AppTextStyles.regular(fontSize: 22.0, fontColor: AppStorages.appColor.value),
-      backgroundColor: AppColors.whiteColor,
-      content: Column(
-        children: [
-          _buildLanguageOption("English"),
-          _buildLanguageOption("French"),
-          _buildLanguageOption("Italian"),
-          _buildLanguageOption("German"),
-          _buildLanguageOption("Portuguese"),
-          _buildLanguageOption("Spanish"),
-        ],
-      ),
-      textCancel: "Cancel",
+
+
+
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: Text("Select a language", style: AppTextStyles.bold(fontSize: 22.0, fontColor: AppStorages.appColor.value)),
+          backgroundColor: AppColors.whiteColor,
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children:[
+              _buildLanguageOption("English"),
+              _buildLanguageOption("French"),
+              _buildLanguageOption("Italian"),
+              _buildLanguageOption("German"),
+              _buildLanguageOption("Portuguese"),
+              _buildLanguageOption("Spanish"),
+            ],
+          ),
+        );
+      },
     );
   }
 
@@ -90,26 +97,36 @@ class LanguageOutputScreen extends StatelessWidget {
       value: language,
       groupValue: controller.selectedLanguage.value,
       activeColor: AppStorages.appColor.value,
-      onChanged: (value) => controller.selectedLanguage.value = value as String,
+      onChanged: (value) {
+        controller.selectedLanguage.value = value as String;
+        Get.back();
+      },
     ));
   }
 
   void _showResetTemplatesPopup(BuildContext context) {
-    Get.defaultDialog(
-      title: "Reset templates",
-      titleStyle: AppTextStyles.regular(fontSize: 22.0, fontColor: AppStorages.appColor.value),
-      backgroundColor: AppColors.whiteColor,
-      content: Column(
-        children: [
-          _buildResetOption("Email and SMS templates"),
-          _buildResetOption("Sale total labels"),
-          _buildResetOption("Sale columns"),
-          _buildResetOption("Statement template"),
-          _buildResetOption("Reset all of above"),
-          _buildResetOption("Do not reset anything"),
-        ],
-      ),
-      textCancel: "Cancel",
+
+
+
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: Text("Reset templates", style: AppTextStyles.bold(fontSize: 22.0, fontColor: AppStorages.appColor.value)),
+          backgroundColor: AppColors.whiteColor,
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children:[
+              _buildResetOption("Email and SMS templates"),
+              _buildResetOption("Sale total labels"),
+              _buildResetOption("Sale columns"),
+              _buildResetOption("Statement template"),
+              _buildResetOption("Reset all of above"),
+              _buildResetOption("Do not reset anything"),
+            ],
+          ),
+        );
+      },
     );
   }
 
@@ -119,7 +136,11 @@ class LanguageOutputScreen extends StatelessWidget {
       value: option,
       groupValue: controller.selectedResetOption.value,
       activeColor: AppStorages.appColor.value,
-      onChanged: (value) => controller.selectedResetOption.value = value as String,
+      onChanged: (value)
+      {
+        controller.selectedResetOption.value = value as String;
+        Get.back();
+      },
     ));
   }
 }

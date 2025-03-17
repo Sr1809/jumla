@@ -17,6 +17,8 @@ abstract class Routes {
   static const MANAGE_DATA = _Paths.MANAGE_DATA;
   static const CUSTOMER_DETAILS = _Paths.CUSTOMER_DETAILS;
   static const APP_SETTINGS = _Paths.APP_SETTINGS;
+  static const WHATS_NEW = _Paths.WHATS_NEW;
+  static const LISTS =  _Paths.LISTS;
 }
 
 abstract class _Paths {
@@ -35,4 +37,6 @@ abstract class _Paths {
   static const MANAGE_DATA = '/manage-data';
   static const CUSTOMER_DETAILS = '/customer-details';
   static const APP_SETTINGS = '/app-settings';
+  static const WHATS_NEW = '/whats-new';
+  static const LISTS = '/lists';
 }

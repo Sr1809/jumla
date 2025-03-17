@@ -77,6 +77,7 @@ class DefaultTermsView extends GetView<AppSettingsController> {
               border: OutlineInputBorder(),
             ),
           ),
+          backgroundColor: AppColors.whiteColor,
           actions: [
             TextButton(
               onPressed: () => Get.back(),

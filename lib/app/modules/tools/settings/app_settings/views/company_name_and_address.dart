@@ -37,8 +37,8 @@ class CompanyInfoView extends GetView<AppSettingsController> {
         child: Container(
           width: containerWidth, // ✅ Responsive width
           padding: EdgeInsets.all(paddingSize),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+          child: ListView(
+
             children: [
               /// **Company Name**
               CommonTextFieldWithTitle(
@@ -120,20 +120,20 @@ class CompanyInfoView extends GetView<AppSettingsController> {
         padding: EdgeInsets.symmetric(horizontal: paddingSize),
         decoration: BoxDecoration(
           color: AppStorages.appColor.value,
-          borderRadius: BorderRadius.only(topLeft: Radius.circular(10), topRight: Radius.circular(10)),
+          borderRadius: BorderRadius.only(topLeft: Radius.circular(16), topRight: Radius.circular(16)),
         ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             IconButton(
-              icon: Icon(Icons.save, color: Colors.white, size: textSize),
+              icon: Icon(Icons.save, color: Colors.white),
               onPressed: () {
                 // TODO: Implement Save functionality
               },
             ),
             Text("TAGS", style: AppTextStyles.bold(fontSize: textSize, fontColor: Colors.white)),
             IconButton(
-              icon: Icon(Icons.close, color: Colors.white, size: textSize),
+              icon: Icon(Icons.close, color: Colors.white,),
               onPressed: () => Get.back(),
             ),
           ],

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:jumla/app/modules/auth/add_company_name_address/views/add_company_name_address_view.dart';
+import 'package:jumla/app/resources/app_colors.dart';
 import '../../../../../common/common_appbar.dart';
 import '../../../../../resources/app_styles.dart';
 import '../../../../../core/app_storage.dart';
@@ -22,15 +23,11 @@ class ManageCompaniesScreen extends GetView<AppSettingsController> {
       appBar: CommonAppBarWithTitleAndIcon(
         title: "Manage Companies",
         showBackButton: true,
-        hideLogo: false,
+        hideLogo: true,
         actions: [
           IconButton(
-            icon: Icon(Icons.add, color: Colors.white, size: textSize),
+            icon: Icon(Icons.add, color: AppColors.whiteColor),
             onPressed: () => Get.to(()=>CompanyInfoView()),
-          ),
-          IconButton(
-            icon: Icon(Icons.close, color: Colors.white, size: textSize),
-            onPressed: () => Get.back(),
           ),
         ],
       ),
