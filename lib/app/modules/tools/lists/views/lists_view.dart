@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:jumla/app/modules/tools/lists/views/email_template_view.dart';
+import 'package:jumla/app/modules/tools/lists/views/print_templates_view.dart';
 import 'package:jumla/app/modules/tools/lists/views/sms_templates_view.dart';
 
 import '../../../../common/common_appbar.dart';
@@ -7,6 +9,7 @@ import '../../../../core/app_storage.dart';
 import '../../../../resources/app_colors.dart';
 import '../../../../resources/app_styles.dart';
 import '../controllers/lists_controller.dart';
+import 'company_fields_view.dart';
 
 class ListsView extends GetView<ListsController> {
   const ListsView({super.key});
@@ -15,7 +18,6 @@ class ListsView extends GetView<ListsController> {
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
     bool isTablet = screenWidth > 600;
-
     double paddingSize = isTablet ? 40.0 : 20.0;
     double titleFontSize = isTablet ? 24.0 : 18.0;
     double itemFontSize = isTablet ? 20.0 : 16.0;
@@ -97,9 +99,17 @@ class ListsView extends GetView<ListsController> {
     return InkWell(
       onTap: () {
         if(title == "SMS Templates"){
-         // Get.to(()=>SmsTemplatesView());
+          Get.to(()=>SmsTemplatesView());
+        }else if(title == "Email Templates"){
+          Get.to(()=>EmailTemplatesView());
+        }else if(title == "Print Templates"){
+          Get.to(()=>PrintTemplatesView());
+        }else if(title == "Company Fields"){
+          Get.to(()=>CompanyFieldListView());
         }
-      },
+
+
+        },
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 10),
         child: Text(title,
