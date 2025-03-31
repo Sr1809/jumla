@@ -71,11 +71,16 @@ class CommonAppBarWithTitleAndIcon extends StatelessWidget implements PreferredS
         children: [
           hideLogo?SizedBox(): Image.asset(AppAssets.logo, height: 40, width: 50),
           hideLogo?SizedBox(): SizedBox(width: 10),
-          Text(
-            title,
-            style: AppTextStyles.bold(
-              fontSize: 18.0,
-              fontColor: AppColors.whiteColor,
+          Expanded(
+            child: Text(
+              title,
+              style: AppTextStyles.bold(
+                fontSize: 18.0,
+                fontColor: AppColors.whiteColor,
+              ),
+              overflow: TextOverflow.ellipsis,
+              maxLines: 1,
+              softWrap: false,
             ),
           ),
         ],

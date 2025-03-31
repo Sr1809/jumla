@@ -82,19 +82,21 @@ class AddCompanyNameAddressView
       bottomNavigationBar: Container(
         color: AppColors.blueColor,
         padding: EdgeInsets.symmetric(horizontal: paddingSize, vertical: 10),
-        child: InkWell(
-          onTap: () {
-            Get.toNamed(Routes.ADD_CURRENCY_DATE_FORMATS);
-          },
-          child: SizedBox(
-            width: double.infinity,
-            height: isTablet ? 70 : 30, // Bigger button height for tablets
-            child: Center(
-              child: Text(
-                "NEXT",
-                style: AppTextStyles.bold(
-                  fontSize: textSize,
-                  fontColor: AppColors.whiteColor,
+        child: SafeArea(
+          child: InkWell(
+            onTap: () {
+              Get.toNamed(Routes.ADD_CURRENCY_DATE_FORMATS);
+            },
+            child: SizedBox(
+              width: double.infinity,
+              height: isTablet ? 70 : 30, // Bigger button height for tablets
+              child: Center(
+                child: Text(
+                  "NEXT",
+                  style: AppTextStyles.bold(
+                    fontSize: textSize,
+                    fontColor: AppColors.whiteColor,
+                  ),
                 ),
               ),
             ),

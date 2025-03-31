@@ -65,16 +65,16 @@ class LoginView extends GetWidget<LoginController> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Obx(() => controller.showAccountField.value
-                  ? CommonTextField2(
+                  ? CommonTextField(
                 label: "Account",
                 controller: TextEditingController(),
               )
                   : SizedBox()),
-              CommonTextField2(
+              CommonTextField(
                 label: "Username",
                 controller: controller.usernameController,
               ),
-              CommonTextField2(
+              CommonTextField(
                 label: "Password",
                 controller: controller.passwordController,
                 isPassword: true,

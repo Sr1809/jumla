@@ -31,33 +31,46 @@ class ManageCompaniesScreen extends GetView<AppSettingsController> {
           ),
         ],
       ),
-      body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: paddingSize, vertical: 10),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              "To see more options, long-hold on one line.",
-              style: AppTextStyles.regular(fontSize: textSize * 0.8, fontColor: Colors.grey),
-            ),
-            SizedBox(height: 10),
-            Expanded(
-              child:ListView.builder(
-                  itemCount: 1,
-                  itemBuilder: (context, index) {
-
-                    return ListTile(
-                      title: Text(
-                        "test",
-                        style: AppTextStyles.bold(fontSize: textSize, fontColor: Colors.black),
-                      ),
-                    );
-                  },
-
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Container(
+            width: Get.width,
+            color: AppColors.blackColor,
+            child: Center(
+              child: Text(
+                "To see more options, long-hold on one line.",
+                style: AppTextStyles.regular(fontSize: textSize * 0.8, fontColor: Colors.white),
               ),
             ),
-          ],
-        ),
+          ),
+          SizedBox(height: 10),
+          Expanded(
+            child:ListView.builder(
+                itemCount: 1,
+                padding: EdgeInsets.all(20),
+                itemBuilder: (context, index) {
+                  return GestureDetector(
+                    onTap: ()=>Get.to(()=>CompanyInfoView()),
+                    child: Card(
+                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+
+                      child: ListTile(
+                        tileColor: AppStorages.appColor.value.withOpacity(0.1),
+                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+
+                        title: Text(
+                          "test",
+                          style: AppTextStyles.bold(fontSize: textSize, fontColor: Colors.black),
+                        ),
+                      ),
+                    ),
+                  );
+                },
+
+            ),
+          ),
+        ],
       ),
     );
   }

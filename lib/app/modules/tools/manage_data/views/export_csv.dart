@@ -76,22 +76,27 @@ class ExportCSVScreen extends GetView<ManageDataController> {
       ),
 
       /// **Bottom Buttons**
-      bottomNavigationBar: Row(
-        children: [
-          Expanded(
-            child: CommonFullWidthButton(
-              text: "EXPORT",
+      bottomNavigationBar: Container(
+        color: AppStorages.appColor.value,
+        child: SafeArea(
+          child: Row(
+            children: [
+              Expanded(
+                child: CommonFullWidthButton(
+                  text: "EXPORT",
 
-              onTap: () => Get.back(),
-            ),
+                  onTap: () => Get.back(),
+                ),
+              ),
+              Expanded(
+                child: CommonFullWidthButton(
+                  text: "CANCEL",
+                  onTap: () => Get.back(),
+                ),
+              ),
+            ],
           ),
-          Expanded(
-            child: CommonFullWidthButton(
-              text: "CANCEL",
-              onTap: () => Get.back(),
-            ),
-          ),
-        ],
+        ),
       ),
     );
   }

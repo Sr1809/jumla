@@ -22,17 +22,19 @@ class CommonFullWidthButton extends StatelessWidget {
     return Container(
       color: AppStorages.appColor.value,
       padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-      child: InkWell(
-        onTap: onTap,
-        child: SizedBox(
-          width: double.infinity,
-          height: isTablet?50:30,
-          child: Center(
-            child: Text(
-              text,
-              style: AppTextStyles.bold(
-                fontSize: 18.0,
-                fontColor: textColor ?? AppColors.whiteColor,
+      child: SafeArea(
+        child: InkWell(
+          onTap: onTap,
+          child: SizedBox(
+            width: double.infinity,
+            height: isTablet?50:30,
+            child: Center(
+              child: Text(
+                text,
+                style: AppTextStyles.bold(
+                  fontSize: 18.0,
+                  fontColor: textColor ?? AppColors.whiteColor,
+                ),
               ),
             ),
           ),
@@ -99,24 +101,25 @@ class CommonSaveAndNextButton extends StatelessWidget {
     double paddingSize = isTablet ? 40.0 : 20.0; // Adjust padding
     double buttonHeight = isTablet ? 70 : 40;
     return Container(
-      height: buttonHeight,
       padding: EdgeInsets.symmetric(horizontal: paddingSize),
       decoration: BoxDecoration(
         color: AppStorages.appColor.value,
         borderRadius: BorderRadius.only(topLeft: Radius.circular(16), topRight: Radius.circular(16)),
       ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          IconButton(
-            icon: Icon(Icons.save, color: Colors.white,),
-            onPressed: () => Get.back(),
-          ),
-          IconButton(
-            icon: Icon(Icons.close, color: Colors.white),
-            onPressed: () => Get.back(),
-          ),
-        ],
+      child: SafeArea(
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            IconButton(
+              icon: Icon(Icons.save, color: Colors.white,),
+              onPressed: () => Get.back(),
+            ),
+            IconButton(
+              icon: Icon(Icons.close, color: Colors.white),
+              onPressed: () => Get.back(),
+            ),
+          ],
+        ),
       ),
     );
   }

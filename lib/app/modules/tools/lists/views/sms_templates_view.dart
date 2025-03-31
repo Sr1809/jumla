@@ -79,18 +79,21 @@ class SmsTemplatesView extends StatelessWidget {
             icon: Icon(Icons.add,color: AppColors.whiteColor,))
       ],),
 
-      body: Obx(() => ListView.separated(
+      body: Obx(() => ListView.builder(
         itemCount: controller.smsTemplates.length,
         padding: EdgeInsets.all(10),
-        separatorBuilder: (context,index)=>Divider(),
         itemBuilder: (context, index) {
           var template = controller.smsTemplates[index];
-          return ListTile(
-
-            title: Text(template.name, style: AppTextStyles.bold(fontSize: 16.0, fontColor: AppColors.blackColor)),
-            subtitle: Text(template.applyTo, style: AppTextStyles.regular(fontSize: 14.0, fontColor: AppColors.darkGrey)),
-            trailing:  Icon(Icons.star, color: Colors.amber),
-            onTap: () => Get.to(() => AddOrEditSmsTemplatesView(template: template)),
+          return Card(
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+            child: ListTile(
+              tileColor: AppStorages.appColor.value.withOpacity(0.1),
+              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+              title: Text(template.name, style: AppTextStyles.bold(fontSize: 16.0, fontColor: AppColors.blackColor)),
+              subtitle: Text(template.applyTo, style: AppTextStyles.regular(fontSize: 14.0, fontColor: AppColors.darkGrey)),
+              trailing:  Icon(Icons.star, color: Colors.amber),
+              onTap: () => Get.to(() => AddOrEditSmsTemplatesView(template: template)),
+            ),
           );
         },
       )),

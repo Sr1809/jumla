@@ -6,6 +6,7 @@ import 'package:jumla/app/resources/app_colors.dart';
 import 'package:jumla/app/resources/app_styles.dart';
 import '../../../../common/common_text_field.dart';
 import '../../../../core/app_storage.dart';
+import 'installed_template_view.dart';
 
 class PrintTemplatesController extends GetxController {
   var templates = <TemplateModel>[].obs;
@@ -94,8 +95,12 @@ class PrintTemplatesView extends StatelessWidget {
                   onLongPress: () {
                     _showTemplateMenu(context, template);
                   },
+                  onTap: ()=>Get.to(()=>InstalledTemplateScreen()),
                   child: Card(
+                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
                     child: ListTile(
+                      tileColor: AppStorages.appColor.value.withOpacity(0.1),
+                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
                       title: Text(
                         template.name.value,
                         style: AppTextStyles.bold(fontSize: 16.0, fontColor: AppColors.blackColor),
@@ -104,8 +109,6 @@ class PrintTemplatesView extends StatelessWidget {
                         template.company,
                         style: AppTextStyles.regular(fontSize: 14.0, fontColor: AppColors.darkGrey),
                       ),
-                      tileColor: AppStorages.appColor.value.withOpacity(0.1),
-
                       trailing: template.applyToTags.isNotEmpty
                           ? Wrap(
                         direction: Axis.vertical,

@@ -61,7 +61,7 @@ class AddTaxCodeDataView extends GetView<AddTaxCodeDataController> {
                   ],
                 ),
                 SizedBox(height: paddingSize / 2),
-                CommonTextField2(
+                CommonTextField(
                   label: "Description",
                   controller: controller.descriptionController,
                 ),
@@ -74,17 +74,19 @@ class AddTaxCodeDataView extends GetView<AddTaxCodeDataController> {
       bottomNavigationBar: Container(
         color: AppColors.blueColor,
         padding: EdgeInsets.symmetric(horizontal: 30, vertical: 5),
-        child: InkWell(
-          onTap: () {
-            Get.back(result: "${controller.taxNameController.text.trim()}%${controller.taxRateController.text}");
-          },
-          child: SizedBox(
-            width: double.infinity,
-            height: buttonHeight,
-            child: Center(
-              child: Text(
-                "SAVE",
-                style: AppTextStyles.bold(fontSize: textSize, fontColor: AppColors.whiteColor),
+        child: SafeArea(
+          child: InkWell(
+            onTap: () {
+              Get.back(result: "${controller.taxNameController.text.trim()}%${controller.taxRateController.text}");
+            },
+            child: SizedBox(
+              width: double.infinity,
+              height: buttonHeight,
+              child: Center(
+                child: Text(
+                  "SAVE",
+                  style: AppTextStyles.bold(fontSize: textSize, fontColor: AppColors.whiteColor),
+                ),
               ),
             ),
           ),

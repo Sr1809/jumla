@@ -18,7 +18,23 @@ abstract class Routes {
   static const CUSTOMER_DETAILS = _Paths.CUSTOMER_DETAILS;
   static const APP_SETTINGS = _Paths.APP_SETTINGS;
   static const WHATS_NEW = _Paths.WHATS_NEW;
-  static const LISTS =  _Paths.LISTS;
+  static const LISTS = _Paths.LISTS;
+  static const ITEMS = _Paths.ITEMS;
+  static const CUSTOMERS_LIST = _Paths.CUSTOMERS_LIST;
+  static const ESTIMATE = _Paths.ESTIMATE;
+  static const NEW_PROJECT = _Paths.NEW_PROJECT;
+  static const SALES_ORDER = _Paths.SALES_ORDER;
+  static const CASH_SALE = _Paths.CASH_SALE;
+  static const ADD_PAYMENNT = _Paths.ADD_PAYMENNT;
+  static const INVOICE = _Paths.INVOICE;
+  static const SCAN_BARCODES = _Paths.SCAN_BARCODES;
+  static const STATEMENTS = _Paths.STATEMENTS;
+  static const REPORTS = _Paths.REPORTS;
+  static const VENDORS = _Paths.VENDORS;
+  static const TRANSACTIONS = _Paths.TRANSACTIONS;
+  static const PURCHASE_ORDERS = _Paths.PURCHASE_ORDERS;
+  static const QUOTES = _Paths.QUOTES;
+  static const EXPIRING_QUOTES = _Paths.EXPIRING_QUOTES;
 }
 
 abstract class _Paths {
@@ -39,4 +55,20 @@ abstract class _Paths {
   static const APP_SETTINGS = '/app-settings';
   static const WHATS_NEW = '/whats-new';
   static const LISTS = '/lists';
+  static const ITEMS = '/items';
+  static const CUSTOMERS_LIST = '/customers-list';
+  static const ESTIMATE = '/estimate';
+  static const NEW_PROJECT = '/new-project';
+  static const SALES_ORDER = '/sales-order';
+  static const CASH_SALE = '/cash-sale';
+  static const ADD_PAYMENNT = '/add-paymennt';
+  static const INVOICE = '/invoice';
+  static const SCAN_BARCODES = '/scan-barcodes';
+  static const STATEMENTS = '/statements';
+  static const REPORTS = '/reports';
+  static const VENDORS = '/vendors';
+  static const TRANSACTIONS = '/transactions';
+  static const PURCHASE_ORDERS = '/purchase-orders';
+  static const QUOTES = '/quotes';
+  static const EXPIRING_QUOTES = '/expiring-quotes';
 }

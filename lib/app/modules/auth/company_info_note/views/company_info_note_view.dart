@@ -54,17 +54,19 @@ class CompanyInfoNoteView extends GetView<CompanyInfoNoteController> {
       bottomNavigationBar: Container(
         color:  AppStorages.appColor.value,
         padding: EdgeInsets.symmetric(horizontal: paddingSize, vertical: 10),
-        child: InkWell(
-          onTap: () {
-            Get.toNamed(Routes.ADD_COMPANY_NAME_ADDRESS);
-          },
-          child: SizedBox(
-            width: double.infinity,
-            height: isTablet ? 70 : 30, // Slightly bigger button on tablets
-            child: Center(
-              child: Text(
-                "NEXT",
-                style: AppTextStyles.bold(fontSize: isTablet ? 30.0 : 18.0, fontColor: AppColors.whiteColor),
+        child: SafeArea(
+          child: InkWell(
+            onTap: () {
+              Get.toNamed(Routes.ADD_COMPANY_NAME_ADDRESS);
+            },
+            child: SizedBox(
+              width: double.infinity,
+              height: isTablet ? 70 : 30, // Slightly bigger button on tablets
+              child: Center(
+                child: Text(
+                  "NEXT",
+                  style: AppTextStyles.bold(fontSize: isTablet ? 30.0 : 18.0, fontColor: AppColors.whiteColor),
+                ),
               ),
             ),
           ),

@@ -69,13 +69,15 @@ class AddTaxSetupView extends GetView<AddTaxSetupController> {
       bottomNavigationBar: Get.arguments =="setting"?CommonSaveAndNextButton(): Container(
         color: AppColors.blueColor,
         padding: EdgeInsets.symmetric(horizontal: 30, vertical: 10),
-        child:  Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            _buildNavButton("NEXT", Routes.ADD_DEVICE_NAME, textSize,buttonHeight),
-            SizedBox(width: 10),
-            _buildNavButton("BACK", null, textSize,buttonHeight),
-          ],
+        child:  SafeArea(
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              _buildNavButton("NEXT", Routes.ADD_DEVICE_NAME, textSize,buttonHeight),
+              SizedBox(width: 10),
+              _buildNavButton("BACK", null, textSize,buttonHeight),
+            ],
+          ),
         ),
       ),
     );

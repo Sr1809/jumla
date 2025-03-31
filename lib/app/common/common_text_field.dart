@@ -3,47 +3,14 @@ import 'package:jumla/app/core/app_storage.dart';
 
 import '../resources/app_colors.dart';
 import '../resources/app_styles.dart';
+
+
+
+
+
+
+
 class CommonTextField extends StatelessWidget {
-  final String label;
-  final TextEditingController controller;
-  final bool isPassword;
-  Color?  underlineColor;
-
-  CommonTextField({
-    required this.label,
-    required this.controller,
-    this.isPassword = false,
-    this.underlineColor = Colors.blue,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
-      child: TextField(
-        controller: controller,
-        obscureText: isPassword,
-        decoration: InputDecoration(
-          hintText: label,
-          hintStyle: AppTextStyles.regular(fontSize: 16.0, fontColor: AppColors.greyColor),
-          enabledBorder: UnderlineInputBorder(
-            borderSide: BorderSide(color: underlineColor??Colors.blue,width: 0.5),
-          ),
-          focusedBorder: UnderlineInputBorder(
-            borderSide: BorderSide(color: underlineColor??Colors.blue, width: 0.5),
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-
-
-
-
-
-class CommonTextField2 extends StatelessWidget {
   final String label;
   final TextEditingController controller;
   final bool isPassword;
@@ -51,7 +18,7 @@ class CommonTextField2 extends StatelessWidget {
   final IconData? suffixIcon;
   final VoidCallback? onSuffixTap;
 
-  CommonTextField2({
+  CommonTextField({
     required this.label,
     required this.controller,
     this.isPassword = false,
@@ -195,6 +162,7 @@ class CommonTextFieldWithTitle extends StatelessWidget {
                   controller: controller,
                   obscureText: isPassword,
                   autocorrect: false,
+                  autofocus: false,
                   cursorColor: AppColors.blueColor,
                   style: AppTextStyles.regular(
                     fontSize: fontSize,

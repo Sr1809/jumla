@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:jumla/app/core/app_storage.dart';
+import 'package:jumla/app/modules/reports/views/reports_view.dart';
+import 'package:jumla/app/modules/tools/manage_data/views/import_iif.dart';
+import 'package:jumla/app/modules/tools/settings/app_settings/views/manage_company_view.dart';
+import 'package:jumla/app/modules/tools/settings/app_settings/views/recurring_transactions_view.dart';
+import 'package:jumla/app/modules/tools/settings/app_settings/views/signature_setting.dart';
 
 import '../../../common/common_methods.dart';
 import '../../../common/common_widget.dart';
@@ -46,32 +51,60 @@ class DrawerView extends GetView<DrawersController> {
 
               /// **Main Menu**
               _buildSectionHeader("MAIN MENU", textSize),
-              _buildMenuItem(Icons.home, "Home", () {}),
-              _buildMenuItem(Icons.shopping_cart, "Sales", () {}),
-              _buildMenuItem(Icons.shopping_bag, "Purchases", () {}),
-              _buildMenuItem(Icons.person, "Customers", () {}),
-              _buildMenuItem(Icons.people, "Vendors", () {}),
-              _buildMenuItem(Icons.inventory, "Items", () {}),
+              _buildMenuItem(Icons.home, "Home", ()=>Get.back()),
+              _buildMenuItem(Icons.shopping_cart, "Sales", (){
+                Get.back();
+                Get.toNamed(Routes.TRANSACTIONS);}),
+              _buildMenuItem(Icons.shopping_bag, "Purchases", (){
+                Get.back();
+                Get.toNamed(Routes.PURCHASE_ORDERS);}),
+              _buildMenuItem(Icons.person, "Customers", (){
+                Get.back();
+                Get.toNamed(Routes.CUSTOMERS_LIST);}),
+              _buildMenuItem(Icons.people, "Vendors", (){
+                Get.back();
+                Get.toNamed(Routes.VENDORS);}),
+              _buildMenuItem(Icons.inventory, "Items", (){
+                Get.back();
+                Get.toNamed(Routes.ITEMS);}),
 
               Divider(color: AppStorages.appColor.value, height: 20, thickness: dividerThickness),
 
               /// **Reports Section**
               _buildExpandableMenu("REPORTS", [
-                _buildMenuItem(Icons.bar_chart, "Dashboard", () {}),
-                _buildMenuItem(Icons.insert_chart, "Summary reports", () {}),
-                _buildMenuItem(Icons.save, "Saved reports", () {}),
+                _buildMenuItem(Icons.bar_chart, "Dashboard", (){
+                  Get.back();
+                  Get.to(ReportsView(index: 0,));}),
+                _buildMenuItem(Icons.insert_chart, "Summary reports", (){
+                  Get.back();
+                  Get.to(ReportsView(index: 1,));}),
+                _buildMenuItem(Icons.save, "Saved reports", (){
+                  Get.back();
+                  Get.to(ReportsView(index: 2,));}),
               ]),
 
               Divider(color: AppStorages.appColor.value, height: 20, thickness: dividerThickness),
 
               /// **Features Section**
               _buildExpandableMenu("FEATURES", [
-                _buildMenuItem(Icons.edit, "Signatures", () {}),
-                _buildMenuItem(Icons.description, "Statements", () {}),
-                _buildMenuItem(Icons.qr_code, "Scan barcodes", () {}),
-                _buildMenuItem(Icons.apartment, "Multiple companies", () {}),
-                _buildMenuItem(Icons.autorenew, "Recurring invoices", () {}),
-                _buildMenuItem(Icons.book, "QuickBooks", () {}),
+                _buildMenuItem(Icons.edit, "Signatures", (){
+                  Get.back();
+                  Get.to(SignatureSettingsScreen());}),
+                _buildMenuItem(Icons.description, "Statements", (){
+                  Get.back();
+                  Get.toNamed(Routes.STATEMENTS);}),
+                _buildMenuItem(Icons.qr_code, "Scan barcodes", (){
+                  Get.back();
+                  Get.toNamed(Routes.SCAN_BARCODES);}),
+                _buildMenuItem(Icons.apartment, "Multiple companies", (){
+                  Get.back();
+                  Get.to(ManageCompaniesScreen());}),
+                _buildMenuItem(Icons.autorenew, "Recurring invoices", (){
+                  Get.back();
+                  Get.to(RecurringTransactionsScreen());}),
+                _buildMenuItem(Icons.book, "QuickBooks", (){
+                  Get.back();
+                  Get.to(QuickbooksImportScreen());}),
               ]),
 
               Divider(color: AppStorages.appColor.value, height: 20, thickness: dividerThickness),
@@ -99,7 +132,7 @@ class DrawerView extends GetView<DrawersController> {
                 }),
               ]),
               Divider(color: AppStorages.appColor.value, height: 20, thickness: dividerThickness),
-              _buildSectionHeader("CLOUD ACCOUNT", textSize),
+          _buildExpandableMenu("TOOLS", [
               _buildMenuItem(Icons.sync, "Sync options", () {
                 Get.to(()=>SyncOptionsView());
               }),
@@ -117,7 +150,7 @@ class DrawerView extends GetView<DrawersController> {
               _buildMenuItem(Icons.web, "Login to website", () {
                 launchUrls(Uri.parse("https://system.mobilebizco.com/app/login"));
               }),
-
+          ]),
 
               Divider(color: AppStorages.appColor.value, height: 20, thickness: dividerThickness),
 

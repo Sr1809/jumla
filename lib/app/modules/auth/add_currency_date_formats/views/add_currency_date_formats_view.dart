@@ -106,13 +106,15 @@ class AddCurrencyDateFormatsView
           : Container(
               color: AppColors.blueColor,
               padding: EdgeInsets.symmetric(horizontal: 30, vertical: 10),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  _buildNavButton("NEXT", Routes.ADD_TAX_SETUP, textSize,buttonHeight),
-                  SizedBox(width: 10),
-                  _buildNavButton("BACK", null, textSize,buttonHeight),
-                ],
+              child: SafeArea(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    _buildNavButton("NEXT", Routes.ADD_TAX_SETUP, textSize,buttonHeight),
+                    SizedBox(width: 10),
+                    _buildNavButton("BACK", null, textSize,buttonHeight),
+                  ],
+                ),
               ),
             ),
     );
@@ -195,7 +197,7 @@ class AddCurrencyDateFormatsView
       padding: const EdgeInsets.only(left: 5, top: 5),
       child: SizedBox(
         width: 200,
-        child: CommonTextField2(
+        child: CommonTextField(
           label: hint,
           controller: controller,
         ),

@@ -19,6 +19,7 @@ class CompanyInfoView extends GetView<AppSettingsController> {
     double paddingSize = isTablet ? 40.0 : 20.0;
     double containerWidth = screenWidth * (isTablet ? 0.7 : 0.9);
     double buttonHeight = isTablet ? 70 : 40;
+    var controller = Get.put(AppSettingsController());
 
     return Scaffold(
       backgroundColor: Colors.white,
@@ -116,27 +117,28 @@ class CompanyInfoView extends GetView<AppSettingsController> {
 
       /// **Bottom Navigation**
       bottomNavigationBar: Container(
-        height: buttonHeight,
         padding: EdgeInsets.symmetric(horizontal: paddingSize),
         decoration: BoxDecoration(
           color: AppStorages.appColor.value,
           borderRadius: BorderRadius.only(topLeft: Radius.circular(16), topRight: Radius.circular(16)),
         ),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            IconButton(
-              icon: Icon(Icons.save, color: Colors.white),
-              onPressed: () {
-                // TODO: Implement Save functionality
-              },
-            ),
-            Text("TAGS", style: AppTextStyles.bold(fontSize: textSize, fontColor: Colors.white)),
-            IconButton(
-              icon: Icon(Icons.close, color: Colors.white,),
-              onPressed: () => Get.back(),
-            ),
-          ],
+        child: SafeArea(
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              IconButton(
+                icon: Icon(Icons.save, color: Colors.white),
+                onPressed: () {
+                  // TODO: Implement Save functionality
+                },
+              ),
+              Text("TAGS", style: AppTextStyles.bold(fontSize: textSize, fontColor: Colors.white)),
+              IconButton(
+                icon: Icon(Icons.close, color: Colors.white,),
+                onPressed: () => Get.back(),
+              ),
+            ],
+          ),
         ),
       ),
     );

@@ -58,7 +58,7 @@ class BackupDatabaseView extends GetView<ManageDataController> {
               SizedBox(height: paddingSize / 2),
 
               /// **Optional Backup Name**
-              CommonTextField2(
+              CommonTextField(
                 label: "Optional name for backup",
                 controller: controller.optionalController,
                 isPassword: false,

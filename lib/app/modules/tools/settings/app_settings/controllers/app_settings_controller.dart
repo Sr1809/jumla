@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:jumla/app/resources/app_colors.dart';
 
 class AppSettingsController extends GetxController {
   var useScreenUnlock = false.obs;
@@ -106,6 +107,7 @@ class AppSettingsController extends GetxController {
     Get.dialog(
       AlertDialog(
         title: Text(title, style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+        backgroundColor: AppColors.whiteColor,
         content: Column(
           mainAxisSize: MainAxisSize.min,
           children: options.map((option) {
@@ -128,6 +130,10 @@ class AppSettingsController extends GetxController {
   }
 
   var taxCodes = <TaxCode>[].obs;
+
+  addTextCode(){
+
+  }
 
   var terms = [
     {"title": "On invoices", "subtitle": "Default number of days for Due date", "days": 7},

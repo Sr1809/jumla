@@ -46,7 +46,7 @@ class HomeController extends GetxController {
 
     // Annonymus list
     anonymusCustomersList.add(
-        AnonymousCustomers(title: "Inventory report", date: "02/03/25 20:24"));
+        AnonymousCustomers(title: "INVOICE#004", date: "02/03/25 20:24"));
 
     expandableList[0].isExpanded.value = true;
     super.onInit();

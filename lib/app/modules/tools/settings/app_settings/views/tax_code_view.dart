@@ -15,21 +15,17 @@ class TaxCodesScreen extends GetView<AppSettingsController> {
     bool isTablet = screenWidth > 600;
     double textSize = isTablet ? 30.0 : 18.0;
     double paddingSize = isTablet ? 40.0 : 20.0;
-
+var controller = Get.put(AppSettingsController());
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: CommonAppBarWithTitleAndIcon(
         title: "Tax Codes",
         showBackButton: true,
-        hideLogo: false,
+        hideLogo: true,
         actions: [
           IconButton(
             icon: Icon(Icons.add, color: Colors.white),
             onPressed: () =>Get.toNamed(Routes.ADD_TAX_SETUP,arguments: "setting"),
-          ),
-          IconButton(
-            icon: Icon(Icons.close, color: Colors.white),
-            onPressed: () => Get.back(),
           ),
         ],
       ),

@@ -130,6 +130,7 @@ class CommonPicker {
               Divider(color: AppColors.blueColor, thickness: 2),
             ],
           ),
+          backgroundColor: AppColors.whiteColor,
           content: Container(
             width: double.maxFinite,
             child: Column(

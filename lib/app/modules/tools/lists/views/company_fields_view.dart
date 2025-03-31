@@ -1,11 +1,9 @@
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:jumla/app/common/common_appbar.dart';
 import 'package:jumla/app/core/app_storage.dart';
 import 'package:jumla/app/resources/app_colors.dart';
 import 'package:jumla/app/resources/app_styles.dart';
-
 import '../../../../common/common_text_field.dart';
 
 
@@ -122,6 +120,8 @@ class CompanyFieldListView extends StatelessWidget {
                     ),
                     elevation: 1,
                     child: Obx(() => ListTile(
+                      tileColor: AppStorages.appColor.value.withOpacity(0.1),
+                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
                       dense: true,
                       title: Text(
                         field.name.value,
@@ -139,7 +139,6 @@ class CompanyFieldListView extends StatelessWidget {
                           fontColor: AppColors.blackColor,
                         ),
                       ),
-                      tileColor: AppStorages.appColor.value.withOpacity(0.1),
                     )),
                   ),
                 );
@@ -324,10 +323,6 @@ class CompanyFieldFormView extends StatelessWidget {
 
               // ✅ Default Value Field
               CommonTextFieldWithTitle(label: "Default Value (Optional)", controller: defaultValueController),
-
-
-
-
             ],
           ),
         ),
