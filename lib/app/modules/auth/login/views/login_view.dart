@@ -78,6 +78,7 @@ class LoginView extends GetWidget<LoginController> {
                 label: "Password",
                 controller: controller.passwordController,
                 isPassword: true,
+
               ),
               SizedBox(height: isTablet ? 30 : 20),
               Row(
