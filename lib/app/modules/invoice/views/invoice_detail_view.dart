@@ -168,8 +168,8 @@ class InvoiceDetailView extends StatelessWidget {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text("Total Due: 0.00"),
-                      Text("Total Paid: 0.00"),
+                      Text("Total Due: \$0.00"),
+                      Text("Total Paid: \$0.00"),
                       Text("Balance: ", style: AppTextStyles.bold(fontSize: 16.0, fontColor: AppColors.blackColor)),
                     ],
                   ),
@@ -210,7 +210,7 @@ class InvoiceDetailView extends StatelessWidget {
                     children: [
                       Expanded(child: Text(payment["date"] ?? "")),
                       Expanded(child: Text(payment["method"] ?? "")),
-                      Expanded(child: Text(payment["amount"] ?? "")),
+                      Expanded(child: Text("\$${payment["amount"]!}")),
                     ],
                   ),
                 ),
@@ -383,7 +383,7 @@ class InvoiceDetailView extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.all(16.0),
           child: Row(
-            mainAxisAlignment: MainAxisAlignment.end,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               ElevatedButton(onPressed: () {
                 Get.to(()=>AddNoteScreen())!.then((v){
@@ -411,7 +411,7 @@ class InvoiceDetailView extends StatelessWidget {
                           color: AppStorages.appColor.value
                       ),
                       padding: EdgeInsets.only(left: 5,right: 5,top: 3,bottom: 3),
-                      child: Text("${itemNote[index].date.month}/${itemNote[index].date.day}//${itemNote[index].date.year}",style: AppTextStyles.regular(fontSize: 12.0, fontColor: AppColors.whiteColor),)),
+                      child: Text("${itemNote[index].date.month}/${itemNote[index].date.day}/${itemNote[index].date.year}",style: AppTextStyles.regular(fontSize: 12.0, fontColor: AppColors.whiteColor),)),
 
                 ],
               );

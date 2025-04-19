@@ -167,7 +167,7 @@ class ItemsView extends GetWidget<ItemsController> {
                         Text(item.description.value, style: AppTextStyles.regular( fontSize: 12.0,fontColor: AppColors.blackColor)),
                       ],
                     ),
-                    trailing: Text(item.price.value.toStringAsFixed(2), style: AppTextStyles.bold(fontSize: 13.0,fontColor: AppColors.blackColor)),
+                    trailing: Text("\$"+item.price.value.toStringAsFixed(2), style: AppTextStyles.bold(fontSize: 13.0,fontColor: AppColors.blackColor)),
                     onLongPress: () {
                       showModalBottomSheet(
                         context: context,

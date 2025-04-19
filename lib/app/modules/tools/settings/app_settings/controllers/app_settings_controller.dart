@@ -11,6 +11,7 @@ class AppSettingsController extends GetxController {
   var showOnHandItemsOnly = false.obs;
   var noDeleteOfTransactions = false.obs;
   var useItemPictures = false.obs;
+  final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
   final RxString selectedItem = "".obs;
 

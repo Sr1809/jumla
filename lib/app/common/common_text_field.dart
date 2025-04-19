@@ -15,9 +15,12 @@ class CommonTextField extends StatefulWidget {
   final String label;
   final TextEditingController controller;
   final bool isPassword;
-  final IconData? prefixIcon;
-  final IconData? suffixIcon;
+   var prefixIcon;
+   var suffixIcon;
+   var prefix;
   final VoidCallback? onSuffixTap;
+  final TextInputType? keyboardType; // ✅ Added keyboard type
+
 
   CommonTextField({
     required this.label,
@@ -25,7 +28,9 @@ class CommonTextField extends StatefulWidget {
     this.isPassword = false,
     this.prefixIcon,
     this.suffixIcon,
+    this.prefix,
     this.onSuffixTap,
+    this.keyboardType
   });
 
   @override
@@ -77,6 +82,8 @@ class _CommonTextFieldState extends State<CommonTextField> {
               fontSize: fontSize,
               fontColor: AppColors.blackColor,
             ),
+            keyboardType: widget.keyboardType, // ✅ Apply keyboard type
+
             decoration: InputDecoration(
               hintText: widget.label,
               hintStyle: AppTextStyles.light(
@@ -84,7 +91,9 @@ class _CommonTextFieldState extends State<CommonTextField> {
                 fontColor: AppColors.darkGrey,
               ),
               filled: true,
+
               fillColor: Colors.white,
+              prefix: widget.prefix,
               contentPadding: EdgeInsets.symmetric(vertical: paddingVertical, horizontal: 16),
               prefixIcon: widget.prefixIcon != null
                   ? Icon(widget.prefixIcon, color: AppStorages.appColor.value, size: iconSize)
@@ -124,6 +133,7 @@ class _CommonTextFieldState extends State<CommonTextField> {
 
 
 
+
 class CommonTextFieldWithTitle extends StatelessWidget {
   final String label;
   final String? hint;
@@ -132,6 +142,9 @@ class CommonTextFieldWithTitle extends StatelessWidget {
   final IconData? prefixIcon;
   final IconData? suffixIcon;
   final VoidCallback? onSuffixTap;
+  var prefix;
+  final FormFieldValidator<String>? validator;
+  final TextInputType? keyboardType; // ✅ Added keyboard type
 
   CommonTextFieldWithTitle({
     required this.label,
@@ -140,25 +153,28 @@ class CommonTextFieldWithTitle extends StatelessWidget {
     this.isPassword = false,
     this.prefixIcon,
     this.suffixIcon,
+    this.prefix,
     this.onSuffixTap,
+    this.validator,
+    this.keyboardType,
   });
 
   @override
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
-    bool isTablet = screenWidth > 600; // Detect if device is a tablet
+    bool isTablet = screenWidth > 600;
 
-    double fieldWidth = isTablet ? screenWidth * 0.7 : screenWidth * 0.9; // Adjust width
-    double fontSize = isTablet ? 18.0 : 16.0; // Larger font size for tablets
-    double borderRadius = isTablet ? 16.0 : 12.0; // Softer edges on tablets
-    double paddingVertical = isTablet ? 16.0 : 14.0; // More padding on tablets
-    double iconSize = isTablet ? 26 : 22; // Larger icons on tablets
+    double fieldWidth = isTablet ? screenWidth * 0.7 : screenWidth * 0.9;
+    double fontSize = isTablet ? 18.0 : 16.0;
+    double borderRadius = isTablet ? 16.0 : 12.0;
+    double paddingVertical = isTablet ? 16.0 : 14.0;
+    double iconSize = isTablet ? 26 : 22;
 
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
       child: Center(
         child: Container(
-          width: fieldWidth, // Adjusted width based on screen size
+          width: fieldWidth,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -169,28 +185,32 @@ class CommonTextFieldWithTitle extends StatelessWidget {
                   fontColor: AppColors.blackColor,
                 ),
               ),
-              SizedBox(height: 5), // Space between label and text field
+              const SizedBox(height: 5),
               Container(
                 decoration: BoxDecoration(
-                  color: Colors.white, // Ensuring a good contrast background
+                  color: Colors.white,
                   borderRadius: BorderRadius.circular(borderRadius),
                   boxShadow: [
                     BoxShadow(
                       color: Colors.black12,
                       blurRadius: 4,
-                      offset: Offset(0, 2), // Soft shadow for elevation
+                      offset: Offset(0, 2),
                     ),
                   ],
                 ),
-                child: TextField(
+                child: TextFormField(
                   controller: controller,
                   obscureText: isPassword,
+                  validator: validator,
+                  autovalidateMode: AutovalidateMode.onUserInteraction,
                   autocorrect: false,
                   autofocus: false,
+
+                  keyboardType: keyboardType, // ✅ Apply keyboard type
                   cursorColor: AppColors.blueColor,
                   style: AppTextStyles.regular(
                     fontSize: fontSize,
-                    fontColor: AppColors.blackColor, // Better readability
+                    fontColor: AppColors.blackColor,
                   ),
                   decoration: InputDecoration(
                     hintText: hint ?? "",
@@ -199,23 +219,38 @@ class CommonTextFieldWithTitle extends StatelessWidget {
                       fontColor: AppColors.darkGrey,
                     ),
                     filled: true,
-                    fillColor: Colors.white, // Clear contrast against text
-                    contentPadding: EdgeInsets.symmetric(vertical: paddingVertical, horizontal: 16),
+                    prefix: prefix,
+                    fillColor: Colors.white,
+                    contentPadding: EdgeInsets.symmetric(
+                        vertical: paddingVertical, horizontal: 16),
                     prefixIcon: prefixIcon != null
-                        ? Icon(prefixIcon, color: AppStorages.appColor.value, size: iconSize)
+                        ? Icon(prefixIcon,
+                        color: AppStorages.appColor.value, size: iconSize)
                         : null,
                     suffixIcon: suffixIcon != null
                         ? GestureDetector(
                       onTap: onSuffixTap,
-                      child: Icon(suffixIcon, color: AppStorages.appColor.value, size: iconSize),
+                      child: Icon(suffixIcon,
+                          color: AppStorages.appColor.value,
+                          size: iconSize),
                     )
                         : null,
                     enabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: AppStorages.appColor.value, width: 1.2),
+                      borderSide: BorderSide(
+                          color: AppStorages.appColor.value, width: 1.2),
                       borderRadius: BorderRadius.circular(borderRadius),
                     ),
                     focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: AppStorages.appColor.value, width: 1.5),
+                      borderSide: BorderSide(
+                          color: AppStorages.appColor.value, width: 1.5),
+                      borderRadius: BorderRadius.circular(borderRadius),
+                    ),
+                    errorBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.red, width: 1.2),
+                      borderRadius: BorderRadius.circular(borderRadius),
+                    ),
+                    focusedErrorBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.red, width: 1.5),
                       borderRadius: BorderRadius.circular(borderRadius),
                     ),
                   ),
@@ -228,3 +263,6 @@ class CommonTextFieldWithTitle extends StatelessWidget {
     );
   }
 }
+
+
+

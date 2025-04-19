@@ -85,10 +85,19 @@ class AddCurrencyDateFormatsView
                   "By default, this is taken from the selected locale.",
                   textSize,
                 ),
-
-                //   _buildInputLabel("Currency symbol", textSize),
-                _buildTextField(
-                    controller.currencySymbolController, "  ", 60, textSize),
+                Padding(
+                  padding: const EdgeInsets.only(left: 5, top: 5),
+                  child: SizedBox(
+                    width: 200,
+                    child: CommonTextField(
+                      label: "",
+                      controller: controller.currencySymbolController,
+                      prefix: Text("\$",style: AppTextStyles.semiBold(fontSize: 16.0, fontColor: AppColors.blackColor),),
+                                         keyboardType: TextInputType.phone,
+                    ),
+                  ),
+                ),
+                //   _buildInputLabel("Currency symbol", textSize),\
 
                 _buildDescription(
                   "The currency symbol taken from the locale. Override if necessary.\n\n"

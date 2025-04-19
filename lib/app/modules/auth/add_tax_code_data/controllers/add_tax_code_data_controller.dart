@@ -5,4 +5,6 @@ class AddTaxCodeDataController extends GetxController {
   var taxNameController = TextEditingController();
   var taxRateController = TextEditingController();
   var descriptionController = TextEditingController();
+  final GlobalKey<FormState> formKey = GlobalKey<FormState>();
+
 }

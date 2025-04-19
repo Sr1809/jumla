@@ -153,7 +153,7 @@ class SalesOrderListView extends StatelessWidget {
                           ),
                         ],
                       ),
-                      trailing:Obx(()=> Text(item.price.value.toStringAsFixed(2), style: AppTextStyles.bold(fontSize: 14.0,fontColor: !item.isTaxable.value ?AppStorages.appColor.value:AppColors.blackColor))),
+                      trailing:Obx(()=> Text("\$"+item.price.value.toStringAsFixed(2), style: AppTextStyles.bold(fontSize: 14.0,fontColor: !item.isTaxable.value ?AppStorages.appColor.value:AppColors.blackColor))),
                       onLongPress: () {
                         showModalBottomSheet(
                           context: context,

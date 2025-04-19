@@ -121,11 +121,11 @@ var title;
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(item['transaction'] ?? '', style: AppTextStyles.bold(fontSize: 14.0,fontColor: AppColors.blackColor)),
+                      Text(item['transaction'] ?? 'test', style: AppTextStyles.bold(fontSize: 14.0,fontColor: AppColors.blackColor)),
                       Text(item['status'] ?? '', style: AppTextStyles.regular(fontSize: 12.0,fontColor: AppColors.blackColor)),
                     ],
                   )),
-              Expanded(child: Text(item['total'] ?? '0.00')),
+              Expanded(child: Text("\$${item['total']!}")),
             ],
           ),
         );
@@ -146,7 +146,7 @@ var title;
                 children: const [
                   Text("Total Due: 0.00"),
                   Text("Total Paid: 0.00"),
-                  Text("Balance: 0.00", style: TextStyle(fontWeight: FontWeight.bold)),
+                  Text("Balance: \$0.00", style: TextStyle(fontWeight: FontWeight.bold)),
                 ],
               ),
               CommonElevatedButton(text: "Accept Payments", onPressed: () {})
@@ -181,7 +181,7 @@ var title;
                             Text(payment['reference'] ?? ''),
                           ],
                         )),
-                    Expanded(child: Text(payment['amount'] ?? '0.00')),
+                    Expanded(child: Text("\$${payment['amount']!}")),
                   ],
                 ),
               );
@@ -224,7 +224,7 @@ var title;
         Padding(
           padding: const EdgeInsets.all(16.0),
           child: Row(
-            mainAxisAlignment: MainAxisAlignment.end,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               ElevatedButton(onPressed: () {
                 Get.to(()=>AddNoteScreen())!.then((v){
@@ -252,7 +252,7 @@ var title;
                           color: AppStorages.appColor.value
                       ),
                       padding: EdgeInsets.only(left: 5,right: 5,top: 3,bottom: 3),
-                      child: Text("${controller.itemNote[index].date.month}/${controller.itemNote[index].date.day}//${controller.itemNote[index].date.year}",style: AppTextStyles.regular(fontSize: 12.0, fontColor: AppColors.whiteColor),)),
+                      child: Text("${controller.itemNote[index].date.month}/${controller.itemNote[index].date.day}/${controller.itemNote[index].date.year}",style: AppTextStyles.regular(fontSize: 12.0, fontColor: AppColors.whiteColor),)),
 
                 ],
               );

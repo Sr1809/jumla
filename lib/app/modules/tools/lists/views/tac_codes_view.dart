@@ -162,9 +162,28 @@ class TaxCodeFormView extends StatelessWidget {
                 Expanded(
                   child: CommonTextFieldWithTitle(
                     label: "Rate(%)",
+                    hint: "10%",
                     controller: rateController,
+                    keyboardType: TextInputType.number, // Show number keyboard
+                    validator: (value) {
+                      if (value == null || value.trim().isEmpty) {
+                        return 'Rate is required';
+                      }
+
+                      final parsed = double.tryParse(value.replaceAll('%', '').trim());
+                      if (parsed == null) {
+                        return 'Enter a valid number';
+                      }
+
+                      if (parsed < 0 || parsed > 100) {
+                        return 'Rate must be between 0 and 100';
+                      }
+
+                      return null;
+                    },
                   ),
                 ),
+
               ],
             ),
             CommonTextFieldWithTitle(

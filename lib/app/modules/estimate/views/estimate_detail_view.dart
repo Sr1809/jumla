@@ -283,7 +283,7 @@ dividerColor: Colors.transparent,
          Padding(
            padding: const EdgeInsets.all(16.0),
            child: Row(
-             mainAxisAlignment: MainAxisAlignment.end,
+             mainAxisAlignment: MainAxisAlignment.center,
              children: [
                ElevatedButton(onPressed: () {
                  Get.to(()=>AddNoteScreen())!.then((v){
@@ -311,7 +311,7 @@ dividerColor: Colors.transparent,
                            color: AppStorages.appColor.value
                        ),
                        padding: EdgeInsets.only(left: 5,right: 5,top: 3,bottom: 3),
-                       child: Text("${itemNote[index].date.month}/${itemNote[index].date.day}//${itemNote[index].date.year}",style: AppTextStyles.regular(fontSize: 12.0, fontColor: AppColors.whiteColor),)),
+                       child: Text("${itemNote[index].date.month}/${itemNote[index].date.day}/${itemNote[index].date.year}",style: AppTextStyles.regular(fontSize: 12.0, fontColor: AppColors.whiteColor),)),
 
                  ],
                );

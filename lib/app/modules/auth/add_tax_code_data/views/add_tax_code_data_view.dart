@@ -38,34 +38,55 @@ class AddTaxCodeDataView extends GetView<AddTaxCodeDataController> {
           child: Container(
             width: fieldWidth, // Adjust width dynamically
             padding: EdgeInsets.all(paddingSize),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Row(
-                  children: [
-                    Expanded(
-                      child: CommonTextFieldWithTitle(
-                        label: "Name",
-                        hint: "eg. Sales Tax",
-                        controller: controller.taxNameController,
+            child: Form(
+              key: controller.formKey,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    children: [
+                      Expanded(
+                        child: CommonTextFieldWithTitle(
+                          label: "Name",
+                          hint: "eg. Sales Tax",
+                          controller: controller.taxNameController,
+                        ),
                       ),
-                    ),
-                    SizedBox(width: 20),
-                    Expanded(
-                      child: CommonTextFieldWithTitle(
-                        label: "Rate(%)",
-                        hint: "10%",
-                        controller: controller.taxRateController,
+                      SizedBox(width: 20),
+                      Expanded(
+                        child: CommonTextFieldWithTitle(
+                          label: "Rate(%)",
+                          hint: "10%",
+                          controller: controller.taxRateController,
+                          keyboardType: TextInputType.number, // Show number keyboard
+                          validator: (value) {
+                            if (value == null || value.trim().isEmpty) {
+                              return 'Rate is required';
+                            }
+
+                            final parsed = double.tryParse(value.replaceAll('%', '').trim());
+                            if (parsed == null) {
+                              return 'Enter a valid number';
+                            }
+
+                            if (parsed < 0 || parsed > 100) {
+                              return 'Rate must be between 0 and 100';
+                            }
+
+                            return null;
+                          },
+                        ),
                       ),
-                    ),
-                  ],
-                ),
-                SizedBox(height: paddingSize / 2),
-                CommonTextField(
-                  label: "Description",
-                  controller: controller.descriptionController,
-                ),
-              ],
+
+                    ],
+                  ),
+                  SizedBox(height: paddingSize / 2),
+                  CommonTextField(
+                    label: "Description",
+                    controller: controller.descriptionController,
+                  ),
+                ],
+              ),
             ),
           ),
         ),
@@ -77,7 +98,8 @@ class AddTaxCodeDataView extends GetView<AddTaxCodeDataController> {
         child: SafeArea(
           child: InkWell(
             onTap: () {
-              Get.back(result: "${controller.taxNameController.text.trim()}%${controller.taxRateController.text}");
+    if (controller.formKey.currentState!.validate()) {
+              Get.back(result: "${controller.taxNameController.text.trim()}%${controller.taxRateController.text}");}
             },
             child: SizedBox(
               width: double.infinity,

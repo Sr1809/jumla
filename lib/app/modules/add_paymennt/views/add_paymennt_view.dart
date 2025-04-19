@@ -58,6 +58,9 @@ class AddPaymenntView extends GetView<AddPaymenntController> {
                   child: CommonTextFieldWithTitle(
                     controller: controller.amountController,
                      label: 'Amount',
+                    prefix: Text("\$",style: AppTextStyles.semiBold(fontSize: 16.0, fontColor: AppColors.blackColor),),
+                    keyboardType: TextInputType.number,
+
                   ),
                 ),
               ],

@@ -8,4 +8,6 @@ class AddCompanyNameAddressController extends GetxController {
   var emailController = TextEditingController();
   var websiteController = TextEditingController();
   var sloganController = TextEditingController();
+  final GlobalKey<FormState> formKey = GlobalKey<FormState>();
+
 }
